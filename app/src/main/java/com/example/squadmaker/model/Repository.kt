@@ -3,7 +3,6 @@ package com.example.squadmaker.model
 import android.app.Application
 import android.net.Uri
 import androidx.lifecycle.LiveData
-import com.example.marveldemo.utils.Constants
 import com.example.squadmaker.model.database.SquadDatabase
 import com.example.squadmaker.model.database.dao.CharactersDao
 import com.example.squadmaker.model.database.dao.DetailedCharacterDao
@@ -14,6 +13,7 @@ import com.example.squadmaker.model.database.entity.SquadEntity
 import com.example.squadmaker.model.network.api.MarvelApiService
 import com.example.squadmaker.model.network.api.RetrofitBuilder
 import com.example.squadmaker.model.network.response.Character
+import com.example.squadmaker.utils.Constants
 import java.math.BigInteger
 import java.security.MessageDigest
 

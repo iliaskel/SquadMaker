@@ -1,5 +1,8 @@
 <resources>
+
     <string name="app_name">SquadMaker</string>
+
+    <string name="my_squad_title">My Squad</string>
 
     <!-- content description -->
     <string name="application_logo_cd">Application\'s logo</string>
