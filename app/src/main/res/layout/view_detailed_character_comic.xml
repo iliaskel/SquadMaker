@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/character_detailed_view_comics_mcv"
+        style="@style/custom_character_detailed_material_card_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_s"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/character_detailed_view_comics_cl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/character_detailed_view_comics_title"
+                style="@style/title_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_m"
+                android:layout_marginTop="@dimen/space_s"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Last appeared in" />
+
+            <ImageView
+                android:id="@+id/first_comic_image"
+                android:layout_width="150dp"
+                android:layout_height="250dp"
+                android:layout_marginStart="@dimen/space_m"
+                android:layout_marginTop="@dimen/space_s"
+                android:contentDescription="@string/first_comic_image_cd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/character_detailed_view_comics_title"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <ImageView
+                android:id="@+id/second_item_image"
+                android:layout_width="170dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="@dimen/space_s"
+                android:layout_marginEnd="@dimen/space_m"
+                android:contentDescription="@string/second_comic_image_cd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/character_detailed_view_comics_title"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/first_comic_title"
+                style="@style/small_title_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                app:layout_constraintEnd_toEndOf="@+id/first_comic_image"
+                app:layout_constraintStart_toStartOf="@+id/first_comic_image"
+                app:layout_constraintTop_toBottomOf="@+id/first_comic_image"
+                tools:text="Comic Title 1" />
+
+            <TextView
+                android:id="@+id/second_comic_title"
+                style="@style/small_title_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_s"
+                app:layout_constraintEnd_toEndOf="@+id/second_item_image"
+                app:layout_constraintStart_toStartOf="@+id/second_item_image"
+                app:layout_constraintTop_toBottomOf="@+id/second_item_image"
+                tools:text="Comic Title 2" />
+
+            <TextView
+                android:id="@+id/more_comics_title"
+                style="@style/title_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_m"
+                android:layout_marginBottom="@dimen/space_l"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/second_item_image"
+                app:layout_constraintStart_toStartOf="@+id/first_comic_image"
+                app:layout_constraintTop_toBottomOf="@+id/first_comic_title"
+                tools:text="More comics for this hero" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</merge>
