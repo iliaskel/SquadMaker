@@ -18,4 +18,7 @@ interface SquadDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSquadMember(character: CharacterEntity)
 
+    @Query("SELECT * FROM squad_table WHERE id=:id")
+    suspend fun isUserInSquad(id: Int): List<SquadEntity>
+
 }
