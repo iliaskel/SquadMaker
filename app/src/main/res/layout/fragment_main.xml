@@ -8,17 +8,17 @@
     android:background="@color/color_second_layer"
     android:orientation="vertical">
 
-    <com.example.marveldemo.widgets.mainfragment.AppTitleView
+    <com.example.squadmaker.widgets.mainfragment.AppTitleView
         android:id="@+id/main_fragment_app_title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.example.marveldemo.widgets.mainfragment.MySquadView
+    <com.example.squadmaker.widgets.mainfragment.MySquadView
         android:id="@+id/main_fragment_my_squad_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.example.marveldemo.widgets.mainfragment.CharactersView
+    <com.example.squadmaker.widgets.mainfragment.CharactersView
         android:id="@+id/main_fragment_characters_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
