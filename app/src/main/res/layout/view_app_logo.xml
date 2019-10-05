@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/main_fragment_title_mcv"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginBottom="@dimen/space_m"
+        android:elevation="8dp"
+        app:cardBackgroundColor="@color/color_second_layer">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_fragment_title_cl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/main_fragment_logo"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/application_logo_cd"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</merge>
