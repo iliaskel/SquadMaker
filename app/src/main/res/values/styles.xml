@@ -1,11 +1,46 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/color_first_layer</item>
+        <item name="colorPrimaryDark">@color/color_first_layer</item>
+        <item name="colorAccent">@color/marvelRed</item>
+    </style>
+
+    <!-- Title styles -->
+    <style name="title_style">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="small_title_style">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Text style -->
+    <style name="text_style">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <style name="description_text_style" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <!-- CardView style -->
+    <style name="custom_characters_material_card_view_style">
+        <item name="cardBackgroundColor">@color/color_forth_layer</item>
+        <item name="cardCornerRadius">50dp</item>
+        <item name="android:elevation">8dp</item>
+    </style>
+
+    <style name="custom_character_detailed_material_card_view_style">
+        <item name="cardBackgroundColor">@color/color_forth_layer</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="android:elevation">8dp</item>
     </style>
 
 </resources>
