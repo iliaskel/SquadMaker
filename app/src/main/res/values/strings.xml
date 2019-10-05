@@ -9,4 +9,8 @@
     <string name="heroes_image_cd">Heroes image</string>
     <string name="first_comic_image_cd">First comic image that the hero appeared</string>
     <string name="second_comic_image_cd">Second comic image that the hero appeared</string>
+
+    <!-- messaging strings -->
+    <string name="no_description_available">No description available</string>
+
 </resources>
