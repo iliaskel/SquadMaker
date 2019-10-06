@@ -8,6 +8,7 @@
     </style>
 
     <!-- Title styles -->
+
     <style name="title_style">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
@@ -22,15 +23,16 @@
 
     <!-- Text style -->
     <style name="text_style">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <style name="description_text_style" parent="TextAppearance.AppCompat.Caption">
         <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
-    <!-- CardView style -->
+    <!-- Cardview style -->
     <style name="custom_characters_material_card_view_style">
         <item name="cardBackgroundColor">@color/color_forth_layer</item>
         <item name="cardCornerRadius">50dp</item>
