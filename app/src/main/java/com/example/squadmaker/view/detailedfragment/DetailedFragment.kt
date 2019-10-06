@@ -16,8 +16,9 @@ import com.example.squadmaker.R
 import com.example.squadmaker.viewmodel.DetailedViewModel
 import com.example.squadmaker.widgets.detailedfragment.DetailedCharacterInformationView
 import kotlinx.android.synthetic.main.fragment_detailed.*
+import kotlinx.android.synthetic.main.view_detailed_character_information.*
 
-class DetailedFragment : Fragment(), DetailedCharacterInformationView.FabInteraction {
+class DetailedFragment : Fragment(), DetailedCharacterInformationView.CharacterViewInteraction {
 
     // region fields
 
@@ -36,6 +37,7 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.FabInterac
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        updateProgressBarVisibility(true)
         initializeViewModel()
         updateCharacterInformationView()
         initObservers()
@@ -119,6 +121,14 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.FabInterac
         dialog?.show()
     }
 
+    private fun updateProgressBarVisibility(shouldBeShown: Boolean) {
+        if (shouldBeShown) {
+            character_detailed_view_pb.visibility = VISIBLE
+        } else {
+            character_detailed_view_pb.visibility = GONE
+        }
+    }
+
 
     // endregion
 
@@ -136,6 +146,10 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.FabInterac
             viewModel.updateSquadList(isSquadMember)
             showToast(text)
         }
+    }
+
+    override fun signalViewReady() {
+        character_detailed_view_pb.visibility = GONE
     }
 
     override fun onStop() {
