@@ -9,8 +9,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/space_m"
+    android:layout_marginTop="@dimen/space_s"
     android:layout_marginEnd="@dimen/space_m"
-    android:layout_marginBottom="@dimen/space_s">
+    android:layout_marginBottom="@dimen/space_s"
+    android:clickable="true"
+    android:focusable="true"
+    app:rippleColor="@color/color_fifth_layer">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/character_list_item_cl"
@@ -19,22 +23,24 @@
 
         <ImageView
             android:id="@+id/character_list_item_character_image"
-            android:layout_width="@dimen/list_item_character_image_width"
-            android:layout_height="@dimen/list_item_character_image_height"
-            android:layout_margin="@dimen/space_m"
-            android:layout_marginBottom="@dimen/space_s"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="@dimen/space_m"
+            android:layout_marginTop="@dimen/space_m"
+            android:layout_marginBottom="@dimen/space_m"
             android:contentDescription="@string/heroes_image_cd"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
+
         <TextView
             android:id="@+id/character_list_item_character_name"
             style="@style/text_style"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/space_m"
+            android:layout_marginStart="@dimen/space_xl"
             android:layout_marginEnd="@dimen/space_xxl"
             app:layout_constraintBottom_toBottomOf="@+id/character_list_item_character_image"
             app:layout_constraintEnd_toEndOf="parent"

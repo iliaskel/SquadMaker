@@ -11,16 +11,29 @@
     <com.example.squadmaker.widgets.mainfragment.AppTitleView
         android:id="@+id/main_fragment_app_title_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_s" />
 
-    <com.example.squadmaker.widgets.mainfragment.MySquadView
-        android:id="@+id/main_fragment_my_squad_view"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    <com.example.squadmaker.widgets.mainfragment.CharactersView
-        android:id="@+id/main_fragment_characters_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_second_layer"
+            android:orientation="vertical">
 
+            <com.example.squadmaker.widgets.mainfragment.MySquadView
+                android:id="@+id/main_fragment_my_squad_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.example.squadmaker.widgets.mainfragment.CharactersView
+                android:id="@+id/main_fragment_characters_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

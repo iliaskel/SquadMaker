@@ -23,16 +23,18 @@
             style="@style/small_title_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/space_m"
+            android:layout_marginEnd="16dp"
             android:textAlignment="textEnd"
-            tools:text="My Squad" />
+            tools:text="My Squad"
+            tools:textColor="@color/color_first_layer" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_fragment_squad_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/space_s"
+            android:layout_margin="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/list_item_squad"
             tools:orientation="horizontal" />
     </LinearLayout>
 
