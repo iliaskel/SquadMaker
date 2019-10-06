@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/character_detailed_view_sv"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/color_second_layer">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.marveldemo.widgets.detailedfragment.DetailedCharacterInformationView
+        <com.example.squadmaker.widgets.detailedfragment.DetailedCharacterInformationView
             android:id="@+id/detailed_character_information_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.example.marveldemo.widgets.detailedfragment.DetailedCharacterComicsView
+        <com.example.squadmaker.widgets.detailedfragment.DetailedCharacterComicsView
             android:id="@+id/detailed_character_comic_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

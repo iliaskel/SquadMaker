@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
     <com.google.android.material.card.MaterialCardView
@@ -44,11 +44,11 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/second_item_image"
+                android:id="@+id/second_comic_image"
                 android:layout_width="170dp"
                 android:layout_height="250dp"
                 android:layout_marginTop="@dimen/space_s"
-                android:layout_marginEnd="@dimen/space_m"
+                android:layout_marginEnd="@dimen/space_s"
                 android:contentDescription="@string/second_comic_image_cd"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/character_detailed_view_comics_title"
@@ -71,21 +71,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_s"
-                app:layout_constraintEnd_toEndOf="@+id/second_item_image"
-                app:layout_constraintStart_toStartOf="@+id/second_item_image"
-                app:layout_constraintTop_toBottomOf="@+id/second_item_image"
+                app:layout_constraintEnd_toEndOf="@+id/second_comic_image"
+                app:layout_constraintStart_toStartOf="@+id/second_comic_image"
+                app:layout_constraintTop_toBottomOf="@+id/second_comic_image"
                 tools:text="Comic Title 2" />
 
             <TextView
-                android:id="@+id/more_comics_title"
+                android:id="@+id/detailed_character_comic_view_more_comics_label"
                 style="@style/title_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_m"
-                android:layout_marginBottom="@dimen/space_l"
+                android:layout_marginBottom="@dimen/space_s"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/second_item_image"
+                app:layout_constraintEnd_toEndOf="@+id/second_comic_image"
                 app:layout_constraintStart_toStartOf="@+id/first_comic_image"
                 app:layout_constraintTop_toBottomOf="@+id/first_comic_title"
                 tools:text="More comics for this hero" />
