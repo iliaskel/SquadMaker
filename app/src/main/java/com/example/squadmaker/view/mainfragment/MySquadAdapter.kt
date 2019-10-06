@@ -68,6 +68,7 @@ class MySquadAdapter(private val interaction: Interaction? = null) :
             Glide
                 .with(itemView.context)
                 .load(thumbnailPath)
+                .circleCrop()
                 .into(itemView.my_squad_list_item_image)
         }
 

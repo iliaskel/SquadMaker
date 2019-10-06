@@ -47,7 +47,7 @@ class MySquadView @JvmOverloads constructor(context: Context, attrs: AttributeSe
 
     private fun initRecyclerView() {
         main_fragment_squad_rv.layoutManager =
-            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, true)
         main_fragment_squad_rv.setHasFixedSize(false)
         mySquadAdapter = MySquadAdapter(this)
         main_fragment_squad_rv.adapter = mySquadAdapter
