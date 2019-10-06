@@ -119,6 +119,7 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.FabInterac
         dialog?.show()
     }
 
+
     // endregion
 
     // region Overrides function
