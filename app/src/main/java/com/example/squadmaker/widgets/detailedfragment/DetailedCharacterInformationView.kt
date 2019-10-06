@@ -67,8 +67,8 @@ class DetailedCharacterInformationView @JvmOverloads constructor(
 
     private fun setFloatingActionButton(squadMember: Boolean) {
         if (squadMember) {
-            character_detailed_view_fab.setImageResource(R.drawable.fire_vector)
-            character_detailed_view_fab.tag = R.drawable.fire_vector
+            character_detailed_view_fab.setImageResource(R.drawable.fire_white)
+            character_detailed_view_fab.tag = R.drawable.fire_white
         } else {
             character_detailed_view_fab.setImageResource(R.drawable.heart_white)
             character_detailed_view_fab.tag = R.drawable.heart_white
@@ -78,7 +78,7 @@ class DetailedCharacterInformationView @JvmOverloads constructor(
 
     private fun setUpFabListener() {
         character_detailed_view_fab.setOnClickListener {
-            val isSquadMember = character_detailed_view_fab.tag == R.drawable.fire_vector
+            val isSquadMember = character_detailed_view_fab.tag == R.drawable.fire_white
             fabInteraction.fabClicked(
                 isSquadMember,
                 detailed_character_information_view.character_detailed_view_hero_name.text.toString()
@@ -87,12 +87,12 @@ class DetailedCharacterInformationView @JvmOverloads constructor(
     }
 
     fun switchIcons() {
-        if (character_detailed_view_fab.tag == R.drawable.fire_vector) {
+        if (character_detailed_view_fab.tag == R.drawable.fire_white) {
             character_detailed_view_fab.setImageResource(R.drawable.heart_white)
             character_detailed_view_fab.tag = R.drawable.heart_white
         } else {
-            character_detailed_view_fab.setImageResource(R.drawable.fire_vector)
-            character_detailed_view_fab.tag = R.drawable.fire_vector
+            character_detailed_view_fab.setImageResource(R.drawable.fire_white)
+            character_detailed_view_fab.tag = R.drawable.fire_white
         }
     }
 
