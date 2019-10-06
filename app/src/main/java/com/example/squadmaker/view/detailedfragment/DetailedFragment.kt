@@ -149,7 +149,7 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.CharacterV
     }
 
     override fun signalViewReady() {
-        character_detailed_view_pb.visibility = GONE
+        updateProgressBarVisibility(false)
     }
 
     override fun onStop() {
