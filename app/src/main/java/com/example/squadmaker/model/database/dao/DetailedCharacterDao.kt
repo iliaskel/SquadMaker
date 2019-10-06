@@ -10,6 +10,9 @@ interface DetailedCharacterDao {
     @Query("SELECT * FROM detailed_character_table LIMIT 1")
     fun getDetailedCharacter(): LiveData<DetailedCharacterEntity>
 
+    @Query("SELECT * FROM detailed_character_table LIMIT 1")
+    suspend fun getDetailedCharacterEntity(): DetailedCharacterEntity
+
     @Transaction
     suspend fun replaceDetailedCharacter(detailedCharacter: DetailedCharacterEntity) {
         deleteDetailedCharacters()
