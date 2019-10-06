@@ -66,9 +66,11 @@ class CharactersAdapter(private val interaction: Interaction? = null) :
     ) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: CharacterEntity) {
+
             setHeroThumbnail(item.thumbnailPath)
             setHeroName(item.name)
-            setClickListeners(item.id)
+            setListeners(item.id)
+
         }
 
         private fun setHeroName(name: String) {
@@ -84,7 +86,7 @@ class CharactersAdapter(private val interaction: Interaction? = null) :
                 .into(itemView.character_list_item_character_image)
         }
 
-        private fun setClickListeners(id: Int) {
+        private fun setListeners(id: Int) {
             itemView.setOnClickListener {
                 interaction?.characterClicked(id)
             }
