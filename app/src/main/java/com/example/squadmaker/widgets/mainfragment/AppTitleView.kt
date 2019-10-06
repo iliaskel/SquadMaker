@@ -21,5 +21,14 @@ class AppTitleView @JvmOverloads constructor(context: Context, attrs: AttributeS
         Glide.with(context)
             .load(R.drawable.logo)
             .into(main_fragment_logo)
+        Glide.with(context)
+            .load(R.drawable.logo_squad_text_white)
+            .centerCrop()
+            .into(main_fragment_logo_squad_text)
+        Glide.with(context)
+            .load(R.drawable.logo_maker_text_white)
+            .centerCrop()
+            .into(main_fragment_logo_maker_text)
+
     }
 }
