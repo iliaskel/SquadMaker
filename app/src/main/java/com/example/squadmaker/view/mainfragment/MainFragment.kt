@@ -47,6 +47,7 @@ class MainFragment : Fragment(), CharactersView.CharacterInteraction, MySquadVie
 
     override fun squadCharacterClickerClicked(id: Int) {
         navigateToDetailedCharacter(id)
+
     }
     // endregion
 
