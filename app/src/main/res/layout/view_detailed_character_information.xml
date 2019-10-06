@@ -77,6 +77,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/character_detailed_view_hero_name"
                 tools:text="Description" />
 
+            <ProgressBar
+                android:id="@+id/character_detailed_view_pb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/character_detailed_view_character_description"
+                app:layout_constraintEnd_toEndOf="@+id/character_detailed_view_character_image"
+                app:layout_constraintStart_toStartOf="@+id/character_detailed_view_character_image"
+                app:layout_constraintTop_toTopOf="@+id/character_detailed_view_character_image" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
