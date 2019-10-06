@@ -56,10 +56,8 @@ class Repository private constructor(application: Application) {
         }
     }
 
-    // region Public Functions for Main Fragment
+    // region Public Functions
 
-
-    // endregion
 
     suspend fun fetchAndSaveCharacters() {
         val fetchedCharactersList = fetchCharacters()
@@ -74,6 +72,11 @@ class Repository private constructor(application: Application) {
         val characterEntity = getDetailedCharacterEntity(character, isInSquad)
 
         detailedCharacterDao.replaceDetailedCharacter(characterEntity)
+    }
+
+    suspend fun removeDetailedCharacter() {
+        detailedCharacterDao.deleteDetailedCharacters()
+        comicsDao.deleteComics()
     }
 
     suspend fun fetchAndSAveComicsByCharacterId(id: Int) {
@@ -91,11 +94,6 @@ class Repository private constructor(application: Application) {
             val squadEntity = getSquadEntity(currentDetailedCharacter)
             squadDao.insertSquadMember(squadEntity)
         }
-    }
-
-    suspend fun removeDetailedCharacter() {
-        detailedCharacterDao.deleteDetailedCharacters()
-        comicsDao.deleteComics()
     }
 
     // endregion
