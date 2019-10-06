@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.example.squadmaker.R
 import com.example.squadmaker.model.database.entity.DetailedCharacterEntity
+import kotlinx.android.synthetic.main.fragment_detailed.view.*
 import kotlinx.android.synthetic.main.view_detailed_character_information.view.*
 
 class DetailedCharacterInformationView @JvmOverloads constructor(
@@ -66,39 +67,38 @@ class DetailedCharacterInformationView @JvmOverloads constructor(
 
     private fun setFloatingActionButton(squadMember: Boolean) {
         if (squadMember) {
-            character_detailed_view_fab.setImageResource(R.drawable.fire_white)
-            character_detailed_view_fab.tag = R.drawable.fire_white
+            character_detailed_view_fab.setImageResource(R.drawable.fire_vector)
+            character_detailed_view_fab.tag = R.drawable.fire_vector
         } else {
             character_detailed_view_fab.setImageResource(R.drawable.heart_white)
             character_detailed_view_fab.tag = R.drawable.heart_white
+
         }
     }
 
     private fun setUpFabListener() {
         character_detailed_view_fab.setOnClickListener {
-            notifyDatabase()
-            switchIcons()
+            val isSquadMember = character_detailed_view_fab.tag == R.drawable.fire_vector
+            fabInteraction.fabClicked(
+                isSquadMember,
+                detailed_character_information_view.character_detailed_view_hero_name.text.toString()
+            )
         }
     }
 
-    private fun switchIcons() {
-        if (character_detailed_view_fab.tag == R.drawable.fire_white) {
+    fun switchIcons() {
+        if (character_detailed_view_fab.tag == R.drawable.fire_vector) {
             character_detailed_view_fab.setImageResource(R.drawable.heart_white)
             character_detailed_view_fab.tag = R.drawable.heart_white
         } else {
-            character_detailed_view_fab.setImageResource(R.drawable.fire_white)
-            character_detailed_view_fab.tag = R.drawable.fire_white
+            character_detailed_view_fab.setImageResource(R.drawable.fire_vector)
+            character_detailed_view_fab.tag = R.drawable.fire_vector
         }
-    }
-
-    private fun notifyDatabase() {
-        val isSquadMember = character_detailed_view_fab.tag == R.drawable.fire_white
-        fabInteraction.fabClicked(isSquadMember)
     }
 
     // endregion
 
     interface FabInteraction {
-        fun fabClicked(isSquadMember: Boolean)
+        fun fabClicked(isSquadMember: Boolean, name: String)
     }
 }
