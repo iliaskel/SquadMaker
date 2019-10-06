@@ -4,6 +4,7 @@ import com.example.squadmaker.model.network.response.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import com.example.squadmaker.model.network.comicsresponse.Response as ComicResponse
 
 interface MarvelApiService {
 
@@ -23,4 +24,14 @@ interface MarvelApiService {
         @Query("apikey") apiKey: String = "c260e787ab759bb0b83ad1d4d024de9c",
         @Query("hash") hash: String
     ): Response
+
+    @GET("/v1/public/comics")
+    suspend fun getComicsByCharacterId(
+        @Query("format") format: String = "comic",
+        @Query("formatType") formatType: String = "comic",
+        @Query("characters") characterId: String,
+        @Query("ts") ts: String,
+        @Query("apikey") apiKey: String = "c260e787ab759bb0b83ad1d4d024de9c",
+        @Query("hash") hash: String
+    ): ComicResponse
 }
