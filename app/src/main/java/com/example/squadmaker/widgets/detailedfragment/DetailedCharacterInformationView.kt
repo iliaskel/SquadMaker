@@ -17,7 +17,7 @@ class DetailedCharacterInformationView @JvmOverloads constructor(
 
     // region Fields
 
-    private lateinit var fabInteraction: FabInteraction
+    private lateinit var characterViewInteraction: CharacterViewInteraction
 
     // endregion
 
@@ -33,10 +33,21 @@ class DetailedCharacterInformationView @JvmOverloads constructor(
         setCharacterName(characterInformation.name)
         setCharacterDescription(characterInformation.description)
         setFloatingActionButton(characterInformation.isSquadMember)
+        signalViewReady()
     }
 
-    fun setListener(fabInteraction: FabInteraction) {
-        this.fabInteraction = fabInteraction
+    fun switchIcons() {
+        if (character_detailed_view_fab.tag == R.drawable.fire_white) {
+            character_detailed_view_fab.setImageResource(R.drawable.heart_white)
+            character_detailed_view_fab.tag = R.drawable.heart_white
+        } else {
+            character_detailed_view_fab.setImageResource(R.drawable.fire_white)
+            character_detailed_view_fab.tag = R.drawable.fire_white
+        }
+    }
+
+    fun setListener(characterViewInteraction: CharacterViewInteraction) {
+        this.characterViewInteraction = characterViewInteraction
     }
 
     // endregion
@@ -79,26 +90,21 @@ class DetailedCharacterInformationView @JvmOverloads constructor(
     private fun setUpFabListener() {
         character_detailed_view_fab.setOnClickListener {
             val isSquadMember = character_detailed_view_fab.tag == R.drawable.fire_white
-            fabInteraction.fabClicked(
+            characterViewInteraction.fabClicked(
                 isSquadMember,
                 detailed_character_information_view.character_detailed_view_hero_name.text.toString()
             )
         }
     }
 
-    fun switchIcons() {
-        if (character_detailed_view_fab.tag == R.drawable.fire_white) {
-            character_detailed_view_fab.setImageResource(R.drawable.heart_white)
-            character_detailed_view_fab.tag = R.drawable.heart_white
-        } else {
-            character_detailed_view_fab.setImageResource(R.drawable.fire_white)
-            character_detailed_view_fab.tag = R.drawable.fire_white
-        }
+    private fun signalViewReady() {
+        characterViewInteraction.signalViewReady()
     }
 
     // endregion
 
-    interface FabInteraction {
+    interface CharacterViewInteraction {
         fun fabClicked(isSquadMember: Boolean, name: String)
+        fun signalViewReady()
     }
 }
