@@ -12,9 +12,8 @@
     android:layout_marginTop="@dimen/space_xs"
     android:layout_marginEnd="@dimen/space_m"
     android:layout_marginBottom="@dimen/space_xs"
-    android:clickable="true"
-    android:focusable="true"
-    app:rippleColor="@color/color_fifth_layer">
+    android:background="?attr/selectableItemBackground"
+    android:stateListAnimator="@animator/lift_to_touch_animator">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/character_list_item_cl"
