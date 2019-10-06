@@ -9,9 +9,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/space_m"
-    android:layout_marginTop="@dimen/space_s"
+    android:layout_marginTop="@dimen/space_xs"
     android:layout_marginEnd="@dimen/space_m"
-    android:layout_marginBottom="@dimen/space_s"
+    android:layout_marginBottom="@dimen/space_xs"
     android:clickable="true"
     android:focusable="true"
     app:rippleColor="@color/color_fifth_layer">
