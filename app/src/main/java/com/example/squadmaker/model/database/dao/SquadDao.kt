@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.squadmaker.model.database.entity.CharacterEntity
 import com.example.squadmaker.model.database.entity.SquadEntity
 
 
@@ -16,9 +15,12 @@ interface SquadDao {
     fun getSquad(): LiveData<List<SquadEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSquadMember(character: CharacterEntity)
+    suspend fun insertSquadMember(squadEntity: SquadEntity)
 
     @Query("SELECT * FROM squad_table WHERE id=:id")
-    suspend fun isUserInSquad(id: Int): List<SquadEntity>
+    suspend fun isCharacterInSquad(id: Int): List<SquadEntity>
+
+    @Query("DELETE  FROM squad_table WHERE id=:id")
+    suspend fun deleteSquadMember(id: Int)
 
 }
