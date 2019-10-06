@@ -60,6 +60,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_s"
+                android:layout_marginBottom="@dimen/space_s"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/first_comic_image"
                 app:layout_constraintStart_toStartOf="@+id/first_comic_image"
                 app:layout_constraintTop_toBottomOf="@+id/first_comic_image"
@@ -71,24 +74,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_s"
-                app:layout_constraintEnd_toEndOf="@+id/second_comic_image"
-                app:layout_constraintStart_toStartOf="@+id/second_comic_image"
-                app:layout_constraintTop_toBottomOf="@+id/second_comic_image"
-                tools:text="Comic Title 2" />
-
-            <TextView
-                android:id="@+id/detailed_character_comic_view_more_comics_label"
-                style="@style/title_style"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_m"
                 android:layout_marginBottom="@dimen/space_s"
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/second_comic_image"
-                app:layout_constraintStart_toStartOf="@+id/first_comic_image"
-                app:layout_constraintTop_toBottomOf="@+id/first_comic_title"
-                tools:text="More comics for this hero" />
+                app:layout_constraintStart_toStartOf="@+id/second_comic_image"
+                app:layout_constraintTop_toBottomOf="@+id/second_comic_image"
+                tools:text="Comic Title 2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
