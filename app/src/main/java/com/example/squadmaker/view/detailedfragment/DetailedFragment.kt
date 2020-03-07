@@ -26,6 +26,8 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.CharacterV
 
     // endregion
 
+    // region Lifecycle overrides functions
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +45,13 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.CharacterV
         initObservers()
         attachListeners()
     }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.removeDetailedCharacter()
+    }
+
+    // endregion
 
     // region Private Functions
 
@@ -132,7 +141,7 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.CharacterV
 
     // endregion
 
-    // region Overrides function
+    // region CharacterViewInteraction functions
 
     override fun fabClicked(isSquadMember: Boolean, name: String) {
         if (isSquadMember) {
@@ -150,11 +159,6 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.CharacterV
 
     override fun signalViewReady() {
         updateProgressBarVisibility(false)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.removeDetailedCharacter()
     }
 
     // endregion

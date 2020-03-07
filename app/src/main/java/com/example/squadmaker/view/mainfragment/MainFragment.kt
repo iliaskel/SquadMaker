@@ -22,6 +22,7 @@ class MainFragment : Fragment(), CharactersView.CharacterInteraction, MySquadVie
 
     // endregion
 
+    // region Lifecycle overrides functions
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,14 +42,6 @@ class MainFragment : Fragment(), CharactersView.CharacterInteraction, MySquadVie
         attachListeners()
     }
 
-    override fun characterClicked(id: Int) {
-        navigateToDetailedCharacter(id)
-    }
-
-    override fun squadCharacterClickerClicked(id: Int) {
-        navigateToDetailedCharacter(id)
-
-    }
     // endregion
 
     // region Private Functions
@@ -94,6 +87,19 @@ class MainFragment : Fragment(), CharactersView.CharacterInteraction, MySquadVie
     private fun attachListeners() {
         main_fragment_characters_view.setListener(this)
         main_fragment_my_squad_view.setListener(this)
+    }
+
+    // endregion
+
+    // region Click Listeners functions
+
+    override fun characterClicked(id: Int) {
+        navigateToDetailedCharacter(id)
+    }
+
+    override fun squadCharacterClickerClicked(id: Int) {
+        navigateToDetailedCharacter(id)
+
     }
 
     // endregion
