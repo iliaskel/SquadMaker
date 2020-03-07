@@ -2,6 +2,7 @@ package com.example.squadmaker.model
 
 import android.app.Application
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.squadmaker.model.database.SquadDatabase
 import com.example.squadmaker.model.database.dao.CharactersDao
@@ -15,8 +16,10 @@ import com.example.squadmaker.model.database.entity.SquadEntity
 import com.example.squadmaker.model.network.api.MarvelApiService
 import com.example.squadmaker.model.network.api.RetrofitBuilder
 import com.example.squadmaker.model.network.comicsresponse.ComicsDetails
+import com.example.squadmaker.model.network.comicsresponse.Data
 import com.example.squadmaker.model.network.response.Character
 import com.example.squadmaker.utils.Constants
+import retrofit2.HttpException
 import java.math.BigInteger
 import java.security.MessageDigest
 import com.example.squadmaker.model.network.comicsresponse.Response as ComicsResponse
@@ -24,12 +27,19 @@ import com.example.squadmaker.model.network.comicsresponse.Response as ComicsRes
 
 class Repository private constructor(application: Application) {
 
+    // region Fields
+
+    private val TAG = Repository::class.java.simpleName
+
     private var marvelApiService: MarvelApiService
     private var charactersDao: CharactersDao
     private var detailedCharacterDao: DetailedCharacterDao
     private var squadDao: SquadDao
     private var comicsDao: ComicsDao
 
+    // endregion
+
+    // region Initialisation
     init {
         val marvelDatabase = SquadDatabase.getInstance(application)
         charactersDao = marvelDatabase.charactersDao()
@@ -40,7 +50,6 @@ class Repository private constructor(application: Application) {
     }
 
     companion object {
-
         @Volatile
         private var instance: Repository? = null
 
@@ -56,8 +65,9 @@ class Repository private constructor(application: Application) {
         }
     }
 
-    // region Public Functions
+    // endregion
 
+    // region Public Functions
 
     suspend fun fetchAndSaveCharacters() {
         val fetchedCharactersList = fetchCharacters()
@@ -79,7 +89,7 @@ class Repository private constructor(application: Application) {
         comicsDao.deleteComics()
     }
 
-    suspend fun fetchAndSAveComicsByCharacterId(id: Int) {
+    suspend fun fetchAndSaveComicsByCharacterId(id: Int) {
         val comicsResponse = fetchComicsByCharacterId(id)
         val comicsEntities = getComicEntities(comicsResponse)
 
@@ -108,9 +118,13 @@ class Repository private constructor(application: Application) {
         val md5 = getMd5Hash()
         val ts = getCurrentTimestamp()
 
-        val response = marvelApiService.getCharacters(ts = ts, hash = md5)
-
-        return response.data.results
+        return try {
+            val response = marvelApiService.getCharacters(ts = ts, hash = md5)
+            response.data.results
+        } catch (e: HttpException) {
+            Log.e(TAG, e.message())
+            listOf()
+        }
     }
 
     private suspend fun fetchDetailedCharacterById(id: Int): Character {
@@ -127,12 +141,20 @@ class Repository private constructor(application: Application) {
         val md5 = md5Input.md5()
         val ts = getCurrentTimestamp()
 
-        val response = marvelApiService.getComicsByCharacterId(
-            characterId = id.toString(),
-            ts = ts,
-            hash = md5
-        )
-        return response
+        return try {
+            marvelApiService.getComicsByCharacterId(
+                characterId = id.toString(),
+                ts = ts,
+                hash = md5
+            )
+        } catch (e: HttpException) {
+            Log.e(TAG, e.message())
+            ComicsResponse(
+                code = "",
+                status = "",
+                data = Data(limit = "", total = "", results = listOf())
+            )
+        }
     }
 
     private fun getDetailedCharacterEntity(
