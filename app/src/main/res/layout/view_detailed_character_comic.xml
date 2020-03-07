@@ -47,6 +47,7 @@
                 android:id="@+id/second_comic_image"
                 android:layout_width="170dp"
                 android:layout_height="250dp"
+                android:layout_marginStart="@dimen/space_xs"
                 android:layout_marginTop="@dimen/space_s"
                 android:layout_marginEnd="@dimen/space_s"
                 android:contentDescription="@string/second_comic_image_cd"
