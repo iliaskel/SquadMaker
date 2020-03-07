@@ -8,12 +8,10 @@ import com.example.squadmaker.model.Repository
 import com.example.squadmaker.model.database.entity.ComicsEntity
 import com.example.squadmaker.model.database.entity.DetailedCharacterEntity
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DetailedViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val TAG = "DetailedViewModel "
 
     // region Fields
 
@@ -25,9 +23,9 @@ class DetailedViewModel(application: Application) : AndroidViewModel(application
 
     fun updateDetailedCharacter(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            async {
+            withContext(Dispatchers.IO) {
                 repository.fetchAndSaveDetailedCharacterById(id)
-                repository.fetchAndSAveComicsByCharacterId(id)
+                repository.fetchAndSaveComicsByCharacterId(id)
             }
         }
     }
