@@ -8,9 +8,8 @@ import com.example.squadmaker.model.database.entity.SquadEntity
 import com.example.squadmaker.model.repository.RepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
 
-class MainViewModelImpl(private val repository: RepositoryImpl) : ViewModel(), KoinComponent,
+class MainViewModelImpl(private val repository: RepositoryImpl) : ViewModel(),
     MainViewModel {
 
     // region Public Functions

@@ -9,13 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.squadmaker.R
 import com.example.squadmaker.viewmodel.MainViewModelImpl
-import com.example.squadmaker.widgets.mainfragment.CharactersView
-import com.example.squadmaker.widgets.mainfragment.MySquadView
+import com.example.squadmaker.view.widgets.mainfragment.CharactersView
+import com.example.squadmaker.view.widgets.mainfragment.MySquadView
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.KoinComponent
 
-class MainFragment : Fragment(), KoinComponent, CharactersView.CharacterInteraction,
+class MainFragment : Fragment(), CharactersView.CharacterInteraction,
     MySquadView.SquadInteraction {
 
     // region fields

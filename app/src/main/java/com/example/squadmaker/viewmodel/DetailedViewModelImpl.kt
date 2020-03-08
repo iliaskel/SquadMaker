@@ -9,9 +9,8 @@ import com.example.squadmaker.model.repository.RepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.koin.core.KoinComponent
 
-class DetailedViewModelImpl(private val repository: RepositoryImpl) : ViewModel(), KoinComponent,
+class DetailedViewModelImpl(private val repository: RepositoryImpl) : ViewModel(),
     DetailedViewModel {
 
     // region Public Functions

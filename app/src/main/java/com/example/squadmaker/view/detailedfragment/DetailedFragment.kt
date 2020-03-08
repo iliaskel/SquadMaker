@@ -13,13 +13,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.squadmaker.R
 import com.example.squadmaker.viewmodel.DetailedViewModelImpl
-import com.example.squadmaker.widgets.detailedfragment.DetailedCharacterInformationView
+import com.example.squadmaker.view.widgets.detailedfragment.DetailedCharacterInformationView
 import kotlinx.android.synthetic.main.fragment_detailed.*
 import kotlinx.android.synthetic.main.view_detailed_character_information.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.KoinComponent
 
-class DetailedFragment : Fragment(), KoinComponent,
+class DetailedFragment : Fragment(),
     DetailedCharacterInformationView.CharacterViewInteraction {
 
     // region fields

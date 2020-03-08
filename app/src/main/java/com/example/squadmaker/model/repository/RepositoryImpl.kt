@@ -16,7 +16,6 @@ import com.example.squadmaker.model.network.comicsresponse.ComicsDetails
 import com.example.squadmaker.model.network.comicsresponse.Data
 import com.example.squadmaker.model.network.response.Character
 import com.example.squadmaker.utils.Constants
-import org.koin.core.KoinComponent
 import retrofit2.HttpException
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -29,7 +28,7 @@ class RepositoryImpl(
     private val detailedCharacterDao: DetailedCharacterDao,
     private val comicsDao: ComicsDao,
     private val marvelApiService: MarvelApiService
-) : Repository, KoinComponent {
+) : Repository {
 
     // region Fields
 
