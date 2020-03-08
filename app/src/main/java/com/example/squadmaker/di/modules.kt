@@ -4,8 +4,8 @@ import androidx.room.Room
 import com.example.squadmaker.model.database.SquadDatabase
 import com.example.squadmaker.model.network.api.MarvelApiService
 import com.example.squadmaker.model.repository.RepositoryImpl
-import com.example.squadmaker.viewmodel.DetailedViewModel
-import com.example.squadmaker.viewmodel.MainViewModel
+import com.example.squadmaker.viewmodel.DetailedViewModelImpl
+import com.example.squadmaker.viewmodel.MainViewModelImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -42,8 +42,8 @@ val repositoryModule = module {
 }
 
 val viewModelsModule = module {
-    viewModel { MainViewModel(repository = get()) }
-    viewModel { DetailedViewModel(repository = get()) }
+    viewModel { MainViewModelImpl(repository = get()) }
+    viewModel { DetailedViewModelImpl(repository = get()) }
 }
 
 // endregion
