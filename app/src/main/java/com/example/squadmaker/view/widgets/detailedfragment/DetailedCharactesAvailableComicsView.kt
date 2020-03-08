@@ -1,4 +1,4 @@
-package com.example.squadmaker.widgets.detailedfragment
+package com.example.squadmaker.view.widgets.detailedfragment
 
 import android.content.Context
 import android.util.AttributeSet
