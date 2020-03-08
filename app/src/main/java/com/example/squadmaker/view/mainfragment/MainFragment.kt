@@ -6,19 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.squadmaker.R
-import com.example.squadmaker.viewmodel.MainViewModel
-import com.example.squadmaker.widgets.mainfragment.CharactersView
-import com.example.squadmaker.widgets.mainfragment.MySquadView
+import com.example.squadmaker.viewmodel.MainViewModelImpl
+import com.example.squadmaker.view.widgets.mainfragment.CharactersView
+import com.example.squadmaker.view.widgets.mainfragment.MySquadView
 import kotlinx.android.synthetic.main.fragment_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainFragment : Fragment(), CharactersView.CharacterInteraction, MySquadView.SquadInteraction {
+class MainFragment : Fragment(), CharactersView.CharacterInteraction,
+    MySquadView.SquadInteraction {
 
     // region fields
 
-    private lateinit var viewModel: MainViewModel
+    private val mainViewModel: MainViewModelImpl by viewModel()
 
     // endregion
 
@@ -36,7 +37,6 @@ class MainFragment : Fragment(), CharactersView.CharacterInteraction, MySquadVie
         super.onViewCreated(view, savedInstanceState)
 
         setLogo()
-        initializeViewModel()
         requestCharacters()
         attachObservers()
         attachListeners()
@@ -46,23 +46,19 @@ class MainFragment : Fragment(), CharactersView.CharacterInteraction, MySquadVie
 
     // region Private Functions
 
-    private fun initializeViewModel() {
-        viewModel = ViewModelProviders.of(this)[MainViewModel::class.java]
-    }
-
     private fun requestCharacters() {
-        viewModel.fetchCharacters()
+        mainViewModel.fetchCharacters()
     }
 
 
     private fun attachObservers() {
-        viewModel.getCharacters()
+        mainViewModel.getCharacters()
             .observe(viewLifecycleOwner,
                 Observer { characterList ->
                     main_fragment_characters_view.updateCharactersList(characterList)
                 })
 
-        viewModel.getSquad()
+        mainViewModel.getSquad()
             .observe(viewLifecycleOwner,
                 Observer { squadList ->
                     if (squadList.isEmpty()) {

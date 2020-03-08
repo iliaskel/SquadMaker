@@ -11,18 +11,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.squadmaker.R
-import com.example.squadmaker.viewmodel.DetailedViewModel
-import com.example.squadmaker.widgets.detailedfragment.DetailedCharacterInformationView
+import com.example.squadmaker.viewmodel.DetailedViewModelImpl
+import com.example.squadmaker.view.widgets.detailedfragment.DetailedCharacterInformationView
 import kotlinx.android.synthetic.main.fragment_detailed.*
 import kotlinx.android.synthetic.main.view_detailed_character_information.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailedFragment : Fragment(), DetailedCharacterInformationView.CharacterViewInteraction {
+class DetailedFragment : Fragment(),
+    DetailedCharacterInformationView.CharacterViewInteraction {
 
     // region fields
 
-    private lateinit var viewModel: DetailedViewModel
+    private val detailedViewModel: DetailedViewModelImpl by viewModel()
 
     // endregion
 
@@ -40,7 +41,6 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.CharacterV
         super.onViewCreated(view, savedInstanceState)
 
         updateProgressBarVisibility(true)
-        initializeViewModel()
         updateCharacterInformationView()
         initObservers()
         attachListeners()
@@ -48,31 +48,27 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.CharacterV
 
     override fun onStop() {
         super.onStop()
-        viewModel.removeDetailedCharacter()
+        detailedViewModel.removeDetailedCharacter()
     }
 
     // endregion
 
     // region Private Functions
 
-    private fun initializeViewModel() {
-        viewModel = ViewModelProviders.of(this)[DetailedViewModel::class.java]
-    }
-
     private fun updateCharacterInformationView() {
         val id = arguments?.let { DetailedFragmentArgs.fromBundle(it).characterId }
         if (id != null) {
-            viewModel.updateDetailedCharacter(id)
+            detailedViewModel.updateDetailedCharacter(id)
         }
     }
 
     private fun initObservers() {
-        viewModel.getDetailedCharacter().observe(viewLifecycleOwner, Observer {
+        detailedViewModel.getDetailedCharacter().observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 detailed_character_information_view.updateCharacterInformation(it)
             }
         })
-        viewModel.getComics().observe(viewLifecycleOwner, Observer {
+        detailedViewModel.getComics().observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
                 val extraAvailableComics = it[0].availableComics.minus(it.size)
                 val shouldShowMoreLabel = extraAvailableComics > 0
@@ -120,7 +116,7 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.CharacterV
             detailed_character_information_view.switchIcons()
             val toastText = name.plus(" ").plus(" removed from your squad.")
             showToast(toastText)
-            viewModel.updateSquadList(isSquadMember)
+            detailedViewModel.updateSquadList(isSquadMember)
         }
 
         builder?.setNegativeButton("No") { dialog, which ->
@@ -152,7 +148,7 @@ class DetailedFragment : Fragment(), DetailedCharacterInformationView.CharacterV
                     .plus(" ")
                     .plus("added to your squad!")
             detailed_character_information_view.switchIcons()
-            viewModel.updateSquadList(isSquadMember)
+            detailedViewModel.updateSquadList(isSquadMember)
             showToast(text)
         }
     }

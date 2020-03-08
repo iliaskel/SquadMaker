@@ -19,7 +19,7 @@ import com.example.squadmaker.model.database.entity.SquadEntity
         DetailedCharacterEntity::class,
         CharacterEntity::class,
         ComicsEntity::class],
-    version = 2,
+    version = 4,
     exportSchema = false
 )
 abstract class SquadDatabase : RoomDatabase() {
@@ -28,29 +28,4 @@ abstract class SquadDatabase : RoomDatabase() {
     abstract fun squadDao(): SquadDao
     abstract fun detailedCharacterDao(): DetailedCharacterDao
     abstract fun comicsDao(): ComicsDao
-
-    companion object {
-
-        @Volatile
-        private var instance: SquadDatabase? = null
-
-        fun getInstance(context: Context): SquadDatabase {
-            if (instance != null) {
-                return instance as SquadDatabase
-            }
-            synchronized(this) {
-                val _instance =
-                    Room
-                        .databaseBuilder(
-                            context.applicationContext,
-                            SquadDatabase::class.java,
-                            "marvel_db"
-                        )
-                        .fallbackToDestructiveMigration()
-                        .build()
-                instance = _instance
-                return _instance
-            }
-        }
-    }
 }
