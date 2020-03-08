@@ -12,8 +12,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.squadmaker.R
-import com.example.squadmaker.viewmodel.DetailedViewModelImpl
 import com.example.squadmaker.view.widgets.detailedfragment.DetailedCharacterInformationView
+import com.example.squadmaker.viewmodel.DetailedViewModelImpl
 import kotlinx.android.synthetic.main.fragment_detailed.*
 import kotlinx.android.synthetic.main.view_detailed_character_information.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -109,6 +109,7 @@ class DetailedFragment : Fragment(),
 
     private fun showConfirmationControlDialog(isSquadMember: Boolean, name: String) {
         val builder = context?.let { AlertDialog.Builder(it) }
+
         builder?.setTitle("Attention!")
         builder?.setMessage("Are you sure that you want to remove $name from your squad List?")
 
@@ -119,9 +120,14 @@ class DetailedFragment : Fragment(),
             detailedViewModel.updateSquadList(isSquadMember)
         }
 
-        builder?.setNegativeButton("No") { dialog, which ->
+        builder?.setNegativeButton("No") { _, _ ->
         }
         val dialog: AlertDialog? = builder?.create()
+
+        dialog?.getButton(AlertDialog.BUTTON_POSITIVE)
+            ?.setTextColor(resources.getColor(R.color.marvelRedDark, null))
+        dialog?.getButton(AlertDialog.BUTTON_NEGATIVE)
+            ?.setTextColor(resources.getColor(R.color.marvelRedDark, null))
 
         dialog?.show()
     }
