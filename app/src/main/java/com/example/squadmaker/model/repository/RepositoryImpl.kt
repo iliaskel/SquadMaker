@@ -1,10 +1,8 @@
-package com.example.squadmaker.model
+package com.example.squadmaker.model.repository
 
-import android.app.Application
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.example.squadmaker.model.database.SquadDatabase
 import com.example.squadmaker.model.database.dao.CharactersDao
 import com.example.squadmaker.model.database.dao.ComicsDao
 import com.example.squadmaker.model.database.dao.DetailedCharacterDao
@@ -14,69 +12,41 @@ import com.example.squadmaker.model.database.entity.ComicsEntity
 import com.example.squadmaker.model.database.entity.DetailedCharacterEntity
 import com.example.squadmaker.model.database.entity.SquadEntity
 import com.example.squadmaker.model.network.api.MarvelApiService
-import com.example.squadmaker.model.network.api.RetrofitBuilder
 import com.example.squadmaker.model.network.comicsresponse.ComicsDetails
 import com.example.squadmaker.model.network.comicsresponse.Data
 import com.example.squadmaker.model.network.response.Character
 import com.example.squadmaker.utils.Constants
+import org.koin.core.KoinComponent
 import retrofit2.HttpException
 import java.math.BigInteger
 import java.security.MessageDigest
 import com.example.squadmaker.model.network.comicsresponse.Response as ComicsResponse
 
 
-class Repository private constructor(application: Application) {
+class RepositoryImpl(
+    private val charactersDao: CharactersDao,
+    private val squadDao: SquadDao,
+    private val detailedCharacterDao: DetailedCharacterDao,
+    private val comicsDao: ComicsDao,
+    private val marvelApiService: MarvelApiService
+) : Repository, KoinComponent {
 
     // region Fields
 
-    private val TAG = Repository::class.java.simpleName
-
-    private var marvelApiService: MarvelApiService
-    private var charactersDao: CharactersDao
-    private var detailedCharacterDao: DetailedCharacterDao
-    private var squadDao: SquadDao
-    private var comicsDao: ComicsDao
-
-    // endregion
-
-    // region Initialisation
-    init {
-        val marvelDatabase = SquadDatabase.getInstance(application)
-        charactersDao = marvelDatabase.charactersDao()
-        squadDao = marvelDatabase.squadDao()
-        detailedCharacterDao = marvelDatabase.detailedCharacterDao()
-        comicsDao = marvelDatabase.comicsDao()
-        marvelApiService = RetrofitBuilder.marvelApiService
-    }
-
-    companion object {
-        @Volatile
-        private var instance: Repository? = null
-
-        fun getInstance(application: Application): Repository {
-            if (instance != null) {
-                return instance as Repository
-            }
-            synchronized(Repository) {
-                val _instance = Repository(application)
-                instance = _instance
-                return _instance
-            }
-        }
-    }
+    private val TAG = RepositoryImpl::class.java.simpleName
 
     // endregion
 
     // region Public Functions
 
-    suspend fun fetchAndSaveCharacters() {
+    override suspend fun fetchAndSaveCharacters() {
         val fetchedCharactersList = fetchCharacters()
         val characterEntityList = getCharacterEntityList(fetchedCharactersList)
 
         charactersDao.deleteAndInsertCharacters(characterEntityList)
     }
 
-    suspend fun fetchAndSaveDetailedCharacterById(id: Int) {
+    override suspend fun fetchAndSaveDetailedCharacterById(id: Int) {
         val character = fetchDetailedCharacterById(id)
         val isInSquad = squadDao.isCharacterInSquad(id).isNotEmpty()
         val characterEntity = getDetailedCharacterEntity(character, isInSquad)
@@ -84,19 +54,19 @@ class Repository private constructor(application: Application) {
         detailedCharacterDao.replaceDetailedCharacter(characterEntity)
     }
 
-    suspend fun removeDetailedCharacter() {
+    override suspend fun removeDetailedCharacter() {
         detailedCharacterDao.deleteDetailedCharacters()
         comicsDao.deleteComics()
     }
 
-    suspend fun fetchAndSaveComicsByCharacterId(id: Int) {
+    override suspend fun fetchAndSaveComicsByCharacterId(id: Int) {
         val comicsResponse = fetchComicsByCharacterId(id)
         val comicsEntities = getComicEntities(comicsResponse)
 
         comicsDao.replaceComics(comicsEntities)
     }
 
-    suspend fun updateSquadEntry(isSquadMember: Boolean) {
+    override suspend fun updateSquadEntry(isSquadMember: Boolean) {
         val currentDetailedCharacter = detailedCharacterDao.getDetailedCharacterEntity()
         if (isSquadMember) {
             squadDao.deleteSquadMember(currentDetailedCharacter.id)
