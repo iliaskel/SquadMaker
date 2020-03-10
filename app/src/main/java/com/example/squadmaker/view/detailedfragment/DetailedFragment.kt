@@ -1,6 +1,5 @@
 package com.example.squadmaker.view.detailedfragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -98,36 +97,32 @@ class DetailedFragment : Fragment(),
         detailed_character_information_view.setListener(this)
     }
 
-    @SuppressLint("ResourceType")
     private fun showToast(text: String) {
-        // fake margin
-        val textToShow = "  ".plus(text).plus("  ")
-        val toast = Toast.makeText(context, textToShow, Toast.LENGTH_LONG)
-        toast.view.setBackgroundColor(resources.getInteger(R.color.color_second_layer))
+        val toast = Toast.makeText(context, text, Toast.LENGTH_LONG)
         toast.show()
     }
 
     private fun showConfirmationControlDialog(isSquadMember: Boolean, name: String) {
         val builder = context?.let { AlertDialog.Builder(it) }
 
-        builder?.setTitle("Attention!")
-        builder?.setMessage("Are you sure that you want to remove $name from your squad List?")
+        builder?.setTitle(R.string.alert_dialog_title)
+        builder?.setMessage(getString(R.string.alert_dialog_text, name))
 
-        builder?.setPositiveButton("Yes") { _, _ ->
+        builder?.setPositiveButton(R.string.positive_button_text) { _, _ ->
             detailed_character_information_view.switchIcons()
-            val toastText = name.plus(" ").plus(" removed from your squad.")
+            val toastText = (getString(R.string.hero_removed_text, name))
             showToast(toastText)
             detailedViewModel.updateSquadList(isSquadMember)
         }
 
-        builder?.setNegativeButton("No") { _, _ ->
+        builder?.setNegativeButton(R.string.negative_button_text) { _, _ ->
         }
         val dialog: AlertDialog? = builder?.create()
 
         dialog?.getButton(AlertDialog.BUTTON_POSITIVE)
             ?.setTextColor(resources.getColor(R.color.marvelRedDark, null))
         dialog?.getButton(AlertDialog.BUTTON_NEGATIVE)
-            ?.setTextColor(resources.getColor(R.color.marvelRedDark, null))
+            ?.setTextColor(resources.getColor(R.color.color_forth_layer, null))
 
         dialog?.show()
     }
@@ -149,10 +144,7 @@ class DetailedFragment : Fragment(),
         if (isSquadMember) {
             showConfirmationControlDialog(isSquadMember, name)
         } else {
-            val text =
-                name
-                    .plus(" ")
-                    .plus("added to your squad!")
+            val text = getString(R.string.hero_added_to_squad, name)
             detailed_character_information_view.switchIcons()
             detailedViewModel.updateSquadList(isSquadMember)
             showToast(text)

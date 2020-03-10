@@ -13,8 +13,17 @@
     <string name="maker_text_logo_cd">Maker text logo</string>
 
     <!-- messaging strings -->
+    <string name="blank_space"> </string>
     <string name="no_description_available">No description available</string>
     <string name="no_comics_available">There aren\'t any available comics for this hero</string>
     <string name="more_comics_available_label_substring">more comics for this hero</string>
 
+
+    <!-- Alert dialog strings -->
+    <string name="alert_dialog_title">Attention!</string>
+    <string name="alert_dialog_text">Are you sure that you want to remove %s from your squad List?</string>
+    <string name="positive_button_text">Yes</string>
+    <string name="negative_button_text">No</string>
+    <string name="hero_added_to_squad">%s added to your squad!</string>
+    <string name="hero_removed_text">%s removed from your squad.</string>
 </resources>
