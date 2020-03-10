@@ -20,5 +20,7 @@ The technologies than have been used in this App are:
   <li><b>Retrofit</b> for network requests</li>
 </ul>  
 
+<b>**In order to run the application, you would need to register for an API key </b> @ https://developer.marvel.com/
+
 <h2>SquadMaker Demo</h2>
 <img src="app/demogif/demogif.gif" height="500"/>
