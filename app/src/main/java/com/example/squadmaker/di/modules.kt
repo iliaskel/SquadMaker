@@ -32,11 +32,8 @@ val repositoryModule = module {
 
     single {
         RepositoryImpl(
-            get<SquadDatabase>().charactersDao(),
-            get<SquadDatabase>().squadDao(),
-            get<SquadDatabase>().detailedCharacterDao(),
-            get<SquadDatabase>().comicsDao(),
-            get()
+            squadDatabase = get(),
+            marvelApiService = get()
         )
     }
 }

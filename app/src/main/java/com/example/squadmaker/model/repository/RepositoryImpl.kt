@@ -3,10 +3,7 @@ package com.example.squadmaker.model.repository
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.example.squadmaker.model.database.dao.CharactersDao
-import com.example.squadmaker.model.database.dao.ComicsDao
-import com.example.squadmaker.model.database.dao.DetailedCharacterDao
-import com.example.squadmaker.model.database.dao.SquadDao
+import com.example.squadmaker.model.database.SquadDatabase
 import com.example.squadmaker.model.database.entity.CharacterEntity
 import com.example.squadmaker.model.database.entity.ComicsEntity
 import com.example.squadmaker.model.database.entity.DetailedCharacterEntity
@@ -21,18 +18,18 @@ import java.math.BigInteger
 import java.security.MessageDigest
 import com.example.squadmaker.model.network.comicsresponse.Response as ComicsResponse
 
-
 class RepositoryImpl(
-    private val charactersDao: CharactersDao,
-    private val squadDao: SquadDao,
-    private val detailedCharacterDao: DetailedCharacterDao,
-    private val comicsDao: ComicsDao,
+    squadDatabase: SquadDatabase,
     private val marvelApiService: MarvelApiService
 ) : Repository {
 
     // region Fields
 
     private val TAG = RepositoryImpl::class.java.simpleName
+    private val charactersDao = squadDatabase.charactersDao()
+    private val squadDao = squadDatabase.squadDao()
+    private val detailedCharacterDao = squadDatabase.detailedCharacterDao()
+    private val comicsDao = squadDatabase.comicsDao()
 
     // endregion
 
@@ -97,8 +94,7 @@ class RepositoryImpl(
     }
 
     private suspend fun fetchDetailedCharacterById(id: Int): Character {
-        val md5Input = getMd5Input()
-        val md5 = md5Input.md5()
+        val md5 = getMd5Hash()
         val ts = getCurrentTimestamp()
 
         val response = marvelApiService.getCharacterById(id.toString(), ts = ts, hash = md5)
@@ -106,8 +102,7 @@ class RepositoryImpl(
     }
 
     private suspend fun fetchComicsByCharacterId(id: Int): ComicsResponse {
-        val md5Input = getMd5Input()
-        val md5 = md5Input.md5()
+        val md5 = getMd5Hash()
         val ts = getCurrentTimestamp()
 
         return try {

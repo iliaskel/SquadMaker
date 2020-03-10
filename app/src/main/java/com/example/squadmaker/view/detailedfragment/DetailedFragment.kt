@@ -76,7 +76,7 @@ class DetailedFragment : Fragment(),
                 detailed_character_comic_view.updateComics(it)
                 detailed_Character_available_comics_view.updateAvailability(extraAvailableComics)
             } else {
-                updateComicViewVisibility(false, false)
+                updateComicViewVisibility(shouldShowComics = false, shouldShowMoreLabel = false)
             }
         })
     }
