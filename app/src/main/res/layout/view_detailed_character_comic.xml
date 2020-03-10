@@ -28,9 +28,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_m"
                 android:layout_marginTop="@dimen/space_s"
+                android:text="@string/last_appeared_in"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Last appeared in" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/first_comic_image"

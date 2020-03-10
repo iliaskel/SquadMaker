@@ -17,6 +17,7 @@
     <string name="no_description_available">No description available</string>
     <string name="no_comics_available">There aren\'t any available comics for this hero</string>
     <string name="more_comics_available_label_substring">more comics for this hero</string>
+    <string name="last_appeared_in">Last appeared in</string>
 
 
     <!-- Alert dialog strings -->
