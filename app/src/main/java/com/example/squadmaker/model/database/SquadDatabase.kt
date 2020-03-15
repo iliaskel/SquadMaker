@@ -1,8 +1,6 @@
 package com.example.squadmaker.model.database
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.squadmaker.model.database.dao.CharactersDao
 import com.example.squadmaker.model.database.dao.ComicsDao
@@ -13,6 +11,9 @@ import com.example.squadmaker.model.database.entity.ComicsEntity
 import com.example.squadmaker.model.database.entity.DetailedCharacterEntity
 import com.example.squadmaker.model.database.entity.SquadEntity
 
+/**
+ * An abstract [RoomDatabase] representation and the corresponding DAOs
+ */
 @Database(
     entities = [
         SquadEntity::class,

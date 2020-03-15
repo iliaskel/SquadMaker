@@ -2,6 +2,10 @@ package com.example.squadmaker.model.network.response
 
 import com.google.gson.annotations.SerializedName
 
+
+/**
+ *Data class representing the information needed to present a specific character.
+ */
 data class Character(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
