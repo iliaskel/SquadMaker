@@ -1,6 +1,7 @@
 package com.example.squadmaker.model.network.api
 
 import com.example.squadmaker.model.network.response.Response
+import com.example.squadmaker.utils.Constants
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -26,7 +27,7 @@ interface MarvelApiService {
         @Query("orderBy") orderBy: String = "name",
         @Query("limit") limit: String = "40",
         @Query("ts") ts: String,
-        @Query("apikey") apiKey: String = "c260e787ab759bb0b83ad1d4d024de9c",
+        @Query("apikey") apiKey: String = Constants.PUBLIC_API_KEY,
         @Query("hash") hash: String
     ): Response
 
@@ -42,7 +43,7 @@ interface MarvelApiService {
     suspend fun getCharacterById(
         @Path("characterId") characterId: String,
         @Query("ts") ts: String,
-        @Query("apikey") apiKey: String = "c260e787ab759bb0b83ad1d4d024de9c",
+        @Query("apikey") apiKey: String = Constants.PUBLIC_API_KEY,
         @Query("hash") hash: String
     ): Response
 
@@ -62,7 +63,7 @@ interface MarvelApiService {
         @Query("formatType") formatType: String = "comic",
         @Query("characters") characterId: String,
         @Query("ts") ts: String,
-        @Query("apikey") apiKey: String = "c260e787ab759bb0b83ad1d4d024de9c",
+        @Query("apikey") apiKey: String = Constants.PUBLIC_API_KEY,
         @Query("hash") hash: String
     ): ComicResponse
 }
