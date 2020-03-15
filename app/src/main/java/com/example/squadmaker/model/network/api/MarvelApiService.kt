@@ -18,7 +18,7 @@ interface MarvelApiService {
      * @param orderBy the required field to order the results.
      * @param limit the limit of the returned results.
      * @param ts a [String] with the current timestamp.
-     * @param apiKey a [String] with the private Api key used for the query.
+     * @param apiKey a [String] with the public Api key used for the query.
      * @param hash a [String] with the Md5 hash used for security reasons
      */
     @GET("v1/public/characters")
@@ -35,7 +35,7 @@ interface MarvelApiService {
      *
      * @param characterId an [Int] representing the id of the character.
      * @param ts a [String] with the current timestamp.
-     * @param apiKey a [String] with the private Api key used for the query.
+     * @param apiKey a [String] with the public Api key used for the query.
      * @param hash a [String] with the Md5 hash used for security reasons
      */
     @GET("/v1/public/characters/{characterId}")
@@ -53,7 +53,7 @@ interface MarvelApiService {
      * @param formatType the format type of the request.
      * @param characterId an [Int] with the character's id
      * @param ts a [String] with the current timestamp.
-     * @param apiKey a [String] with the private Api key used for the query.
+     * @param apiKey a [String] with the public Api key used for the query.
      * @param hash a [String] with the Md5 hash used for security reasons
      */
     @GET("/v1/public/comics")
