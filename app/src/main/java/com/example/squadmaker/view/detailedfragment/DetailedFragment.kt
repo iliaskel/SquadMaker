@@ -15,16 +15,9 @@ import com.example.squadmaker.view.widgets.detailedfragment.DetailedCharacterInf
 import com.example.squadmaker.viewmodel.DetailedViewModelImpl
 import kotlinx.android.synthetic.main.fragment_detailed.*
 import kotlinx.android.synthetic.main.view_detailed_character_information.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DetailedFragment : Fragment(),
+class DetailedFragment(private val detailedViewModel: DetailedViewModelImpl) : Fragment(),
     DetailedCharacterInformationView.CharacterViewInteraction {
-
-    // region fields
-
-    private val detailedViewModel: DetailedViewModelImpl by viewModel()
-
-    // endregion
 
     // region Lifecycle overrides functions
 
