@@ -1,5 +1,9 @@
 package com.example.squadmaker.model.repository
 
+import androidx.lifecycle.LiveData
+import com.example.squadmaker.model.database.entity.ComicsEntity
+import com.example.squadmaker.model.database.entity.DetailedCharacterEntity
+
 interface Repository {
 
     /**
@@ -37,4 +41,14 @@ interface Repository {
      * @param isSquadMember a [Boolean] representing if the character is already a Squad member.
      */
     suspend fun updateSquadEntry(isSquadMember: Boolean)
+
+    /**
+     * @return LiveData with [DetailedCharacterEntity] entry stored in the database
+     */
+    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity>
+
+    /**
+     *@return LiveData list with [ComicsEntity] entries stored in the database
+     */
+    fun getComics(): LiveData<List<ComicsEntity>>
 }

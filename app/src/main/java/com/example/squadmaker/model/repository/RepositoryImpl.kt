@@ -11,7 +11,7 @@ import com.example.squadmaker.model.database.entity.SquadEntity
 import com.example.squadmaker.model.network.api.MarvelApiService
 import com.example.squadmaker.model.network.comicsresponse.ComicsDetails
 import com.example.squadmaker.model.network.comicsresponse.Data
-import com.example.squadmaker.model.network.response.Character
+import com.example.squadmaker.model.network.characterresponse.Character
 import com.example.squadmaker.utils.Constants
 import retrofit2.HttpException
 import java.math.BigInteger
@@ -165,12 +165,10 @@ class RepositoryImpl(
         if (comics.isNullOrEmpty()) {
             return listOf()
         }
+
         val availableComics = response.data.total
         val comicEntities = mutableListOf<ComicsEntity>()
         for ((entriesInList, comic) in comics.withIndex()) {
-            if (entriesInList > 1) {
-                return comicEntities
-            }
             val resourcePath =
                 getThumbnailStringUri(comic.thumbnail.path, comic.thumbnail.extension)
             comicEntities.add(
@@ -220,11 +218,11 @@ class RepositoryImpl(
         return squadDao.getSquad()
     }
 
-    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity> {
+    override fun getDetailedCharacter(): LiveData<DetailedCharacterEntity> {
         return detailedCharacterDao.getDetailedCharacter()
     }
 
-    fun getComics(): LiveData<List<ComicsEntity>> {
+    override fun getComics(): LiveData<List<ComicsEntity>> {
         return comicsDao.getComics()
     }
 
