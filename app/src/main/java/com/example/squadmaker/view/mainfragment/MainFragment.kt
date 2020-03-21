@@ -8,20 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.squadmaker.R
-import com.example.squadmaker.viewmodel.MainViewModelImpl
 import com.example.squadmaker.view.widgets.mainfragment.CharactersView
 import com.example.squadmaker.view.widgets.mainfragment.MySquadView
+import com.example.squadmaker.viewmodel.MainViewModelImpl
 import kotlinx.android.synthetic.main.fragment_main.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainFragment : Fragment(), CharactersView.CharacterInteraction,
+class MainFragment(private val mainViewModel: MainViewModelImpl) : Fragment(),
+    CharactersView.CharacterInteraction,
     MySquadView.SquadInteraction {
-
-    // region fields
-
-    private val mainViewModel: MainViewModelImpl by viewModel()
-
-    // endregion
 
     // region Lifecycle overrides functions
 

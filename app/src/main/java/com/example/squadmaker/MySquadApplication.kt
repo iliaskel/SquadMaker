@@ -1,11 +1,10 @@
 package com.example.squadmaker
 
 import android.app.Application
-import com.example.squadmaker.di.networkModule
-import com.example.squadmaker.di.repositoryModule
-import com.example.squadmaker.di.viewModelsModule
+import com.example.squadmaker.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.fragment.koin.fragmentFactory
 import org.koin.core.context.startKoin
 
 class MySquadApplication : Application() {
@@ -15,7 +14,16 @@ class MySquadApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MySquadApplication)
-            modules(listOf(networkModule, repositoryModule, viewModelsModule))
+            fragmentFactory()
+            modules(
+                listOf(
+                    networkModule,
+                    roomDatabaseModule,
+                    repositoryModule,
+                    viewModelsModule,
+                    fragmentModule
+                )
+            )
         }
     }
 }
