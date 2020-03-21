@@ -5,12 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.squadmaker.model.database.entity.ComicsEntity
 import com.example.squadmaker.model.database.entity.DetailedCharacterEntity
+import com.example.squadmaker.model.repository.Repository
 import com.example.squadmaker.model.repository.RepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DetailedViewModelImpl(private val repository: RepositoryImpl) : ViewModel(),
+class DetailedViewModelImpl(private val repository: Repository) : ViewModel(),
     DetailedViewModel {
 
     // region Public Functions
@@ -40,11 +41,11 @@ class DetailedViewModelImpl(private val repository: RepositoryImpl) : ViewModel(
 
     // region LiveData observing
 
-    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity> {
+    override fun getDetailedCharacter(): LiveData<DetailedCharacterEntity> {
         return repository.getDetailedCharacter()
     }
 
-    fun getComics(): LiveData<List<ComicsEntity>> {
+    override fun getComics(): LiveData<List<ComicsEntity>> {
         return repository.getComics()
     }
 

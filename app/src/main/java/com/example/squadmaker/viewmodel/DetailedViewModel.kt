@@ -1,5 +1,9 @@
 package com.example.squadmaker.viewmodel
 
+import androidx.lifecycle.LiveData
+import com.example.squadmaker.model.database.entity.ComicsEntity
+import com.example.squadmaker.model.database.entity.DetailedCharacterEntity
+
 interface DetailedViewModel {
 
     /**
@@ -24,4 +28,14 @@ interface DetailedViewModel {
      * @param isSquadMember a [Boolean] representing if the character is already a Squad member.
      */
     fun updateSquadList(isSquadMember: Boolean)
+
+    /**
+     * @return LiveData with [DetailedCharacterEntity] entries stored in the database
+     */
+    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity>
+
+    /**
+     * @return LiveData with [ComicsEntity] entries stored in the database
+     */
+    fun getComics(): LiveData<List<ComicsEntity>>
 }
