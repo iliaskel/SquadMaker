@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DetailedViewModelImpl(private val repository: Repository) : ViewModel(),
+class DetailedViewModelImpl(private val repository: RepositoryImpl) : ViewModel(),
     DetailedViewModel {
 
     // region Public Functions

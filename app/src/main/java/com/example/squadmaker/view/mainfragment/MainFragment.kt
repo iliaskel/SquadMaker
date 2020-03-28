@@ -12,10 +12,17 @@ import com.example.squadmaker.view.widgets.mainfragment.CharactersView
 import com.example.squadmaker.view.widgets.mainfragment.MySquadView
 import com.example.squadmaker.viewmodel.MainViewModelImpl
 import kotlinx.android.synthetic.main.fragment_main.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainFragment(private val mainViewModel: MainViewModelImpl) : Fragment(),
+class MainFragment() : Fragment(),
     CharactersView.CharacterInteraction,
     MySquadView.SquadInteraction {
+
+    // region Fields
+
+    private val mainViewModel by viewModel<MainViewModelImpl>()
+
+    // endregion
 
     // region Lifecycle overrides functions
 

@@ -1,7 +1,10 @@
 package com.example.squadmaker
 
 import android.app.Application
-import com.example.squadmaker.di.*
+import com.example.squadmaker.di.networkModule
+import com.example.squadmaker.di.repositoryModule
+import com.example.squadmaker.di.roomDatabaseModule
+import com.example.squadmaker.di.viewModelsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.fragment.koin.fragmentFactory
@@ -20,8 +23,7 @@ class MySquadApplication : Application() {
                     networkModule,
                     roomDatabaseModule,
                     repositoryModule,
-                    viewModelsModule,
-                    fragmentModule
+                    viewModelsModule
                 )
             )
         }
