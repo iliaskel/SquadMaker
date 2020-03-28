@@ -33,7 +33,7 @@ class DetailedFragment(private val detailedViewModel: DetailedViewModelImpl) : F
         super.onViewCreated(view, savedInstanceState)
 
         updateProgressBarVisibility(true)
-        updateCharacterInformationView()
+        updateDetailedCharacterInformation()
         initObservers()
         attachListeners()
     }
@@ -47,7 +47,7 @@ class DetailedFragment(private val detailedViewModel: DetailedViewModelImpl) : F
 
     // region Private Functions
 
-    private fun updateCharacterInformationView() {
+    private fun updateDetailedCharacterInformation() {
         val id = arguments?.let { DetailedFragmentArgs.fromBundle(it).characterId }
         if (id != null) {
             detailedViewModel.updateDetailedCharacter(id)
@@ -62,27 +62,19 @@ class DetailedFragment(private val detailedViewModel: DetailedViewModelImpl) : F
         })
         detailedViewModel.getComics().observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
-                val extraAvailableComics = it[0].availableComics.minus(it.size)
-                val shouldShowMoreLabel = extraAvailableComics > 0
-                updateComicViewVisibility(true, shouldShowMoreLabel)
+                updateComicViewVisibility(true)
                 detailed_character_comic_view.updateComics(it)
-                detailed_Character_available_comics_view.updateAvailability(extraAvailableComics)
             } else {
-                updateComicViewVisibility(shouldShowComics = false, shouldShowMoreLabel = false)
+                updateComicViewVisibility(shouldShowComics = false)
             }
         })
     }
 
-    private fun updateComicViewVisibility(shouldShowComics: Boolean, shouldShowMoreLabel: Boolean) {
+    private fun updateComicViewVisibility(shouldShowComics: Boolean) {
         if (shouldShowComics) {
             detailed_character_comic_view.visibility = VISIBLE
         } else {
             detailed_character_comic_view.visibility = GONE
-        }
-        if (shouldShowMoreLabel) {
-            detailed_Character_available_comics_view.visibility = VISIBLE
-        } else {
-            detailed_Character_available_comics_view.visibility = GONE
         }
     }
 
