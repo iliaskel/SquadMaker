@@ -1,6 +1,6 @@
 package com.example.squadmaker.model.network.api
 
-import com.example.squadmaker.model.network.response.Response
+import com.example.squadmaker.model.network.characterresponse.Response
 import com.example.squadmaker.utils.Constants
 import retrofit2.http.GET
 import retrofit2.http.Path

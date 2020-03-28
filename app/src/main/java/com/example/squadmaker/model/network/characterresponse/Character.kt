@@ -1,4 +1,4 @@
-package com.example.squadmaker.model.network.response
+package com.example.squadmaker.model.network.characterresponse
 
 import com.google.gson.annotations.SerializedName
 

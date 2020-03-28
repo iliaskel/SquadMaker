@@ -73,3 +73,5 @@ Yapp/src/main/java/com/example/squadmaker/model/database/entity/DetailedCharacte
 japp/src/main/java/com/example/squadmaker/view/widgets/detailedfragment/DetailedCharacterInformationView.kt,3/a/3af7cea4829e8f6a190bc879538a41370fe60cfe
 w
 Gapp/src/main/java/com/example/squadmaker/viewmodel/MainViewModelImpl.kt,a/5/a59e1a6154796ced1ca99d9cb7e76d6aabdba30d
+‚
+Rapp/src/main/java/com/example/squadmaker/view/widgets/mainfragment/AppTitleView.kt,f/b/fb57bf52717e8622fe54b355d67ff1b05936ff80

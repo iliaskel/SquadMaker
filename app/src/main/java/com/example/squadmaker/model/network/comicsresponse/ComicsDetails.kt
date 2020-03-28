@@ -1,6 +1,6 @@
 package com.example.squadmaker.model.network.comicsresponse
 
-import com.example.squadmaker.model.network.response.Thumbnail
+import com.example.squadmaker.model.network.characterresponse.Thumbnail
 import com.google.gson.annotations.SerializedName
 
 /**
