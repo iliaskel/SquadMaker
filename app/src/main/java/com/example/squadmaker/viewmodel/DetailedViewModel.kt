@@ -1,8 +1,8 @@
 package com.example.squadmaker.viewmodel
 
 import androidx.lifecycle.LiveData
-import com.example.squadmaker.model.database.entity.ComicsEntity
-import com.example.squadmaker.model.database.entity.DetailedCharacterEntity
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
 
 interface DetailedViewModel {
 

@@ -5,17 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.squadmaker.R
-import com.example.squadmaker.view.widgets.mainfragment.CharactersView
 import com.example.squadmaker.view.widgets.mainfragment.MySquadView
 import com.example.squadmaker.viewmodel.MainViewModelImpl
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainFragment() : Fragment(),
-    CharactersView.CharacterInteraction,
+class MainFragment : Fragment(),
     MySquadView.SquadInteraction {
 
     // region Fields
@@ -55,13 +52,13 @@ class MainFragment() : Fragment(),
     private fun attachObservers() {
         mainViewModel.getCharacters()
             .observe(viewLifecycleOwner,
-                Observer { characterList ->
+                { characterList ->
                     main_fragment_characters_view.updateCharactersList(characterList)
                 })
 
         mainViewModel.getSquad()
             .observe(viewLifecycleOwner,
-                Observer { squadList ->
+                { squadList ->
                     if (squadList.isEmpty()) {
                         main_fragment_my_squad_view.updateViewToInvisible()
                     } else {
@@ -82,7 +79,6 @@ class MainFragment() : Fragment(),
     }
 
     private fun attachListeners() {
-        main_fragment_characters_view.setListener(this)
         main_fragment_my_squad_view.setListener(this)
     }
 
@@ -90,13 +86,8 @@ class MainFragment() : Fragment(),
 
     // region Click Listeners functions
 
-    override fun characterClicked(id: Int) {
-        navigateToDetailedCharacter(id)
-    }
-
     override fun squadCharacterClickerClicked(id: Int) {
         navigateToDetailedCharacter(id)
-
     }
 
     // endregion

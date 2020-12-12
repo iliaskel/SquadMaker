@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.squadmaker.R
-import com.example.squadmaker.model.database.entity.SquadEntity
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
 import kotlinx.android.synthetic.main.list_item_squad.view.*
 
 class MySquadAdapter(private val interaction: Interaction? = null) :

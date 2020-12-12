@@ -3,10 +3,9 @@ package com.example.squadmaker.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.squadmaker.model.database.entity.ComicsEntity
-import com.example.squadmaker.model.database.entity.DetailedCharacterEntity
-import com.example.squadmaker.model.repository.Repository
-import com.example.squadmaker.model.repository.RepositoryImpl
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
+import com.example.squadmaker.repository.RepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.example.squadmaker.R
-import com.example.squadmaker.model.database.entity.DetailedCharacterEntity
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
 import kotlinx.android.synthetic.main.fragment_detailed.view.*
 import kotlinx.android.synthetic.main.view_detailed_character_information.view.*
 

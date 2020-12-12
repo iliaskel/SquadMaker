@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import com.bumptech.glide.Glide
 import com.example.squadmaker.R
-import com.example.squadmaker.model.database.entity.ComicsEntity
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
 import kotlinx.android.synthetic.main.view_detailed_character_comic.view.*
 
 class DetailedCharacterComicsView @JvmOverloads constructor(

@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.squadmaker.R
-import com.example.squadmaker.model.database.entity.SquadEntity
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
 import com.example.squadmaker.view.mainfragment.MySquadAdapter
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlinx.android.synthetic.main.view_my_squad.view.*

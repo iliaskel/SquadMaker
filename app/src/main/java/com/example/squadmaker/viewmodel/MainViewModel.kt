@@ -1,8 +1,9 @@
 package com.example.squadmaker.viewmodel
 
 import androidx.lifecycle.LiveData
-import com.example.squadmaker.model.database.entity.CharacterEntity
-import com.example.squadmaker.model.database.entity.SquadEntity
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
+import com.example.squadmaker.view.uimodel.UICharacter
 
 interface MainViewModel {
 
@@ -14,7 +15,7 @@ interface MainViewModel {
     /**
      * @return [LiveData] of [CharacterEntity] list
      */
-    fun getCharacters(): LiveData<List<CharacterEntity>>
+    fun getCharacters(): LiveData<List<UICharacter>>
 
     /**
      * @return [LiveData] of [SquadEntity] list
