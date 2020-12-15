@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.squadmaker.R
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
+import com.example.squadmaker.view.uimodel.UICharacter
 import com.example.squadmaker.view.widgets.mainfragment.MySquadView
 import com.example.squadmaker.viewmodel.MainViewModelImpl
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -52,13 +55,13 @@ class MainFragment : Fragment(),
     private fun attachObservers() {
         mainViewModel.getCharacters()
             .observe(viewLifecycleOwner,
-                { characterList ->
+                Observer<List<UICharacter>> { characterList ->
                     main_fragment_characters_view.updateCharactersList(characterList)
                 })
 
         mainViewModel.getSquad()
             .observe(viewLifecycleOwner,
-                { squadList ->
+                Observer<List<SquadEntity>> { squadList ->
                     if (squadList.isEmpty()) {
                         main_fragment_my_squad_view.updateViewToInvisible()
                     } else {
