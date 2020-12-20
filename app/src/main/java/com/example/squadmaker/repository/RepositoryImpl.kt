@@ -1,78 +1,67 @@
 package com.example.squadmaker.repository
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
-import com.example.squadmaker.model.localdatasouce.roomdatabase.SquadDatabase
+import com.example.squadmaker.model.localdatasouce.LocalDataSource
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
-import com.example.squadmaker.model.remotedatasource.retrofit.api.MarvelApiService
-import com.example.squadmaker.model.remotedatasource.retrofit.characterresponse.Character
-import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.ComicsDetails
-import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.Data
-import com.example.squadmaker.utils.Constants
+import com.example.squadmaker.model.remotedatasource.RemoteDataSource
+import com.example.squadmaker.model.remotedatasource.retrofit.characterresponse.CharacterDTO
+import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.ComicsDetailsDTO
+import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.ComicsResponseDTO
 import kotlinx.coroutines.flow.Flow
-import retrofit2.HttpException
-import java.math.BigInteger
-import java.security.MessageDigest
 import javax.inject.Inject
-import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.Response as ComicsResponse
 
 class RepositoryImpl
 @Inject
 constructor(
-    squadDatabase: SquadDatabase,
-    private val marvelApiService: MarvelApiService
+    private val localDataSource: LocalDataSource,
+    private val remoteDataSource: RemoteDataSource
 ) : Repository {
 
     // region Fields
 
-    private val TAG = RepositoryImpl::class.java.simpleName
-    private val charactersDao = squadDatabase.charactersDao()
-    private val squadDao = squadDatabase.squadDao()
-    private val detailedCharacterDao = squadDatabase.detailedCharacterDao()
-    private val comicsDao = squadDatabase.comicsDao()
 
     // endregion
 
     // region Public Functions
 
     override suspend fun fetchAndSaveCharacters() {
-        val fetchedCharactersList = fetchCharacters()
+        val fetchedCharactersList = remoteDataSource.fetchCharacters()
         val characterEntityList = getCharacterEntityList(fetchedCharactersList)
 
-        charactersDao.deleteAndInsertCharacters(characterEntityList)
+        localDataSource.replaceCharacterList(characterEntityList)
     }
 
-    override suspend fun fetchAndSaveDetailedCharacterById(id: Int) {
-        val character = fetchDetailedCharacterById(id)
-        val isInSquad = squadDao.isCharacterInSquad(id).isNotEmpty()
+    override suspend fun fetchAndSaveDetailedCharacterById(characterId: Int) {
+        val character = remoteDataSource.fetchDetailedCharacterById(characterId)
+        val isInSquad = localDataSource.getSquadListForCharacterId(characterId).isNotEmpty()
         val characterEntity = getDetailedCharacterEntity(character, isInSquad)
 
-        detailedCharacterDao.replaceDetailedCharacter(characterEntity)
+        localDataSource.replaceDetailedCharacter(characterEntity)
     }
 
     override suspend fun removeDetailedCharacter() {
-        detailedCharacterDao.deleteDetailedCharacters()
-        comicsDao.deleteComics()
+        localDataSource.deleteDetailedCharacter()
+        localDataSource.deleteComics()
     }
 
-    override suspend fun fetchAndSaveComicsByCharacterId(id: Int) {
-        val comicsResponse = fetchComicsByCharacterId(id)
+    override suspend fun fetchAndSaveComicsByCharacterId(characterId: Int) {
+        val comicsResponse = remoteDataSource.getComicsForCharacterId(characterId)
         val comicsEntities = getComicEntities(comicsResponse)
 
-        comicsDao.replaceComics(comicsEntities)
+        localDataSource.replaceComicsList(comicsEntities)
     }
 
     override suspend fun updateSquadEntry(isSquadMember: Boolean) {
-        val currentDetailedCharacter = detailedCharacterDao.getDetailedCharacterEntity()
+        val currentDetailedCharacter = localDataSource.getDetailedCharacterEntity()
         if (isSquadMember) {
-            squadDao.deleteSquadMember(currentDetailedCharacter.id)
+            localDataSource.deleteSquadMember(currentDetailedCharacter.id)
         } else {
             val squadEntity = getSquadEntity(currentDetailedCharacter)
-            squadDao.insertSquadMember(squadEntity)
+            localDataSource.insertSquadMember(squadEntity)
         }
     }
 
@@ -84,68 +73,30 @@ constructor(
         return SquadEntity(detailedCharacter.id, detailedCharacter.resourceUrl)
     }
 
-    private suspend fun fetchCharacters(): List<Character> {
-        val md5 = getMd5Hash()
-        val ts = getCurrentTimestamp()
-
-        return try {
-            val response = marvelApiService.getCharacters(ts = ts, hash = md5)
-            response.data.results
-        } catch (e: HttpException) {
-            Log.e(TAG, e.message())
-            listOf()
-        }
-    }
-
-    private suspend fun fetchDetailedCharacterById(id: Int): Character {
-        val md5 = getMd5Hash()
-        val ts = getCurrentTimestamp()
-
-        val response = marvelApiService.getCharacterById(id.toString(), ts = ts, hash = md5)
-        return response.data.results[0]
-    }
-
-    private suspend fun fetchComicsByCharacterId(id: Int): ComicsResponse {
-        val md5 = getMd5Hash()
-        val ts = getCurrentTimestamp()
-
-        return try {
-            marvelApiService.getComicsByCharacterId(
-                characterId = id.toString(),
-                ts = ts,
-                hash = md5
-            )
-        } catch (e: HttpException) {
-            Log.e(TAG, e.message())
-            ComicsResponse(
-                code = "",
-                status = "",
-                data = Data(limit = "", total = "", results = listOf())
-            )
-        }
-    }
-
     private fun getDetailedCharacterEntity(
-        character: Character,
+        characterDTO: CharacterDTO,
         isInSquad: Boolean
     ): DetailedCharacterEntity {
         val thumbnailPath =
-            getThumbnailStringUri(character.thumbnail.path, character.thumbnail.extension)
+            getThumbnailStringUri(
+                characterDTO.thumbnailDTO.path,
+                characterDTO.thumbnailDTO.extension
+            )
 
         return DetailedCharacterEntity(
-            character.id.toInt(),
-            character.name,
-            character.description,
+            characterDTO.id.toInt(),
+            characterDTO.name,
+            characterDTO.description,
             thumbnailPath,
-            character.comics.available.toInt(),
+            characterDTO.comicsDTO.available.toInt(),
             isInSquad
         )
     }
 
-    private fun getCharacterEntityList(fetchedCharacterList: List<Character>): List<CharacterEntity> {
+    private fun getCharacterEntityList(fetchedCharacterDTOList: List<CharacterDTO>): List<CharacterEntity> {
         val characterEntityList = mutableListOf<CharacterEntity>()
 
-        for (fetchedCharacter in fetchedCharacterList) {
+        for (fetchedCharacter in fetchedCharacterDTOList) {
             val characterEntity = getCharacterEntity(fetchedCharacter)
             characterEntityList.add(characterEntity)
         }
@@ -153,27 +104,27 @@ constructor(
         return characterEntityList
     }
 
-    private fun getCharacterEntity(fetchedCharacter: Character): CharacterEntity {
-        val id = fetchedCharacter.id.toInt()
-        val name = fetchedCharacter.name
+    private fun getCharacterEntity(fetchedCharacterDTO: CharacterDTO): CharacterEntity {
+        val id = fetchedCharacterDTO.id.toInt()
+        val name = fetchedCharacterDTO.name
         val thumbnailStringUri = getThumbnailStringUri(
-            fetchedCharacter.thumbnail.path,
-            fetchedCharacter.thumbnail.extension
+            fetchedCharacterDTO.thumbnailDTO.path,
+            fetchedCharacterDTO.thumbnailDTO.extension
         )
         return CharacterEntity(id, name, thumbnailStringUri)
     }
 
-    private fun getComicEntities(response: ComicsResponse): List<ComicsEntity> {
-        val comics: List<ComicsDetails> = response.data.results
+    private fun getComicEntities(responseDTO: ComicsResponseDTO): List<ComicsEntity> {
+        val comics: List<ComicsDetailsDTO> = responseDTO.dataDTO.results
         if (comics.isNullOrEmpty()) {
             return listOf()
         }
 
-        val availableComics = response.data.total
+        val availableComics = responseDTO.dataDTO.total
         val comicEntities = mutableListOf<ComicsEntity>()
         for ((entriesInList, comic) in comics.withIndex()) {
             val resourcePath =
-                getThumbnailStringUri(comic.thumbnail.path, comic.thumbnail.extension)
+                getThumbnailStringUri(comic.thumbnailDTO.path, comic.thumbnailDTO.extension)
             comicEntities.add(
                 ComicsEntity(
                     entriesInList,
@@ -194,48 +145,24 @@ constructor(
         ).toString()
     }
 
-    private fun getMd5Hash(): String {
-        val md5input = getMd5Input()
-        return md5input.md5()
-    }
-
-    private fun getMd5Input(): String {
-        return (getCurrentTimestamp())
-            .plus(Constants.PRIVATE_API_KEY)
-            .plus(Constants.PUBLIC_API_KEY)
-    }
-
-    private fun getCurrentTimestamp(): String {
-        return (System.currentTimeMillis() / 1000L).toString()
-    }
-
     // endregion
 
     // region LiveData observing
 
     override fun getCharacters(): Flow<List<CharacterEntity>> {
-        return charactersDao.getAllCharacters()
+        return localDataSource.getAllCharacters()
     }
 
     override fun getSquad(): LiveData<List<SquadEntity>> {
-        return squadDao.getSquad()
+        return localDataSource.getSquad()
     }
 
     override fun getDetailedCharacter(): LiveData<DetailedCharacterEntity> {
-        return detailedCharacterDao.getDetailedCharacter()
+        return localDataSource.getDetailedCharacter()
     }
 
     override fun getComics(): LiveData<List<ComicsEntity>> {
-        return comicsDao.getComics()
-    }
-
-    // endregion
-
-    // region Extension Functions
-
-    private fun String.md5(): String {
-        val md = MessageDigest.getInstance("MD5")
-        return BigInteger(1, md.digest(toByteArray())).toString(16).padStart(32, '0')
+        return localDataSource.getComics()
     }
 
     // endregion
