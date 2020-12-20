@@ -1,10 +1,9 @@
 package com.example.squadmaker.view.mainfragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.squadmaker.R
@@ -12,27 +11,22 @@ import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEnti
 import com.example.squadmaker.view.uimodel.UICharacter
 import com.example.squadmaker.view.widgets.mainfragment.MySquadView
 import com.example.squadmaker.viewmodel.MainViewModelImpl
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class MainFragment : Fragment(),
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
+class MainFragment : Fragment(R.layout.fragment_main),
     MySquadView.SquadInteraction {
 
     // region Fields
 
-    private val mainViewModel by viewModel<MainViewModelImpl>()
+    private val mainViewModel: MainViewModelImpl by viewModels()
 
     // endregion
 
     // region Lifecycle overrides functions
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
