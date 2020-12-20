@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Data class representing the information needed for the Comic Items that are related to a specific character.
  */
-data class ComicItems(
+data class ComicItemsDTO(
     @SerializedName("resourceURI") val resourceURI: String,
     @SerializedName("name") val name: String
 )

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Data class representing the thumbnail information for a specific comic
  */
-data class Thumbnail(
+data class ThumbnailDTO(
     @SerializedName("path") val path: String,
     @SerializedName("extension") val extension: String
 )

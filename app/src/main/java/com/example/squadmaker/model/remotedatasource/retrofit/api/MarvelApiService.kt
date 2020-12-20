@@ -1,11 +1,11 @@
 package com.example.squadmaker.model.remotedatasource.retrofit.api
 
-import com.example.squadmaker.model.remotedatasource.retrofit.characterresponse.Response
+import com.example.squadmaker.model.remotedatasource.retrofit.characterresponse.CharactersResponseDTO
 import com.example.squadmaker.utils.Constants
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.Response as ComicResponse
+import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.ComicsResponseDTO as ComicResponse
 
 /**
  * An interface representing all the queries that the Application is using to interact
@@ -29,7 +29,7 @@ interface MarvelApiService {
         @Query("ts") ts: String,
         @Query("apikey") apiKey: String = Constants.PUBLIC_API_KEY,
         @Query("hash") hash: String
-    ): Response
+    ): CharactersResponseDTO
 
     /**
      * Queries a specific character's details.
@@ -45,7 +45,7 @@ interface MarvelApiService {
         @Query("ts") ts: String,
         @Query("apikey") apiKey: String = Constants.PUBLIC_API_KEY,
         @Query("hash") hash: String
-    ): Response
+    ): CharactersResponseDTO
 
     /**
      * Queries the comics of a specific character.
