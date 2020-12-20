@@ -27,7 +27,6 @@ import javax.inject.Singleton
 @InstallIn(ActivityComponent::class)
 @Module
 abstract class RepositoryModule {
-
     @ActivityScoped
     @Binds
     abstract fun bindRepositoryModule(
@@ -38,7 +37,6 @@ abstract class RepositoryModule {
 @InstallIn(ApplicationComponent::class)
 @Module
 abstract class RemoteSourceModule {
-
     @Singleton
     @Binds
     abstract fun bindRemoteSourceModule(
@@ -64,9 +62,9 @@ class RetrofitModule {
     }
 }
 
-@InstallIn(ActivityComponent::class)
+@InstallIn(ApplicationComponent::class)
 @Module
-abstract class LocalDataSource {
+abstract class LocalDataSourceModule {
     @Singleton
     @Binds
     abstract fun bindLocalSourceModule(
