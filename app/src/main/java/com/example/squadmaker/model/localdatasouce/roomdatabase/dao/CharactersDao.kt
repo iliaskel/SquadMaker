@@ -11,7 +11,7 @@ interface CharactersDao {
     fun getAllCharacters(): Flow<List<CharacterEntity>>
 
     @Transaction
-    suspend fun deleteAndInsertCharacters(characterList: List<CharacterEntity>) {
+    suspend fun replaceCharacterList(characterList: List<CharacterEntity>) {
         deleteCharacters()
         insertCharacters(characterList)
     }
