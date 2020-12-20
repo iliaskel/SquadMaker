@@ -1,61 +1,88 @@
 package com.example.squadmaker.di
 
+import android.content.Context
 import androidx.room.Room
+import com.example.squadmaker.model.localdatasouce.LocalDataSource
+import com.example.squadmaker.model.localdatasouce.LocalDataSourceImpl
 import com.example.squadmaker.model.localdatasouce.roomdatabase.SquadDatabase
+import com.example.squadmaker.model.remotedatasource.RemoteDataSource
+import com.example.squadmaker.model.remotedatasource.RemoteDataSourceImpl
 import com.example.squadmaker.model.remotedatasource.retrofit.api.MarvelApiService
+import com.example.squadmaker.repository.Repository
 import com.example.squadmaker.repository.RepositoryImpl
-import com.example.squadmaker.viewmodel.DetailedViewModelImpl
-import com.example.squadmaker.viewmodel.MainViewModelImpl
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ActivityScoped
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
-// region Fields
+@InstallIn(ActivityComponent::class)
+@Module
+abstract class RepositoryModule {
 
-private const val MARVEL_API_BASE_URL: String = "https://gateway.marvel.com:443/"
-
-// endregion
-
-// region Modules
-
-val networkModule = module {
-    single { provideRetrofit() }
+    @ActivityScoped
+    @Binds
+    abstract fun bindRepositoryModule(
+        repositoryImpl: RepositoryImpl
+    ): Repository
 }
 
-val roomDatabaseModule = module {
-    single {
-        Room.databaseBuilder(get(), SquadDatabase::class.java, "marvel_db").build()
+@InstallIn(ApplicationComponent::class)
+@Module
+abstract class RemoteSourceModule {
+
+    @Singleton
+    @Binds
+    abstract fun bindRemoteSourceModule(
+        remoteDataSourceImpl: RemoteDataSourceImpl
+    ): RemoteDataSource
+}
+
+@InstallIn(ApplicationComponent::class)
+@Module
+class RetrofitModule {
+
+    private val MARVEL_API_BASE_URL: String = "https://gateway.marvel.com:443/"
+
+    @Singleton
+    @Provides
+    fun provideRetrofitModule(): MarvelApiService {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(MARVEL_API_BASE_URL)
+            .client(getHttpClientInterceptor())
+            .build()
+            .create(MarvelApiService::class.java)
     }
 }
 
-val repositoryModule = module {
-    single {
-        RepositoryImpl(
-            squadDatabase = get(),
-            marvelApiService = get()
-        )
+@InstallIn(ActivityComponent::class)
+@Module
+abstract class LocalDataSource {
+    @Singleton
+    @Binds
+    abstract fun bindLocalSourceModule(
+        localDataSourceImpl: LocalDataSourceImpl
+    ): LocalDataSource
+}
+
+@InstallIn(ApplicationComponent::class)
+@Module
+class RoomDatabaseModule {
+    @Singleton
+    @Provides
+    fun provideRoomDatabaseModule(@ApplicationContext applicationContext: Context): SquadDatabase {
+        return Room.databaseBuilder(applicationContext, SquadDatabase::class.java, "marvel_db")
+            .build()
     }
-}
-
-val viewModelsModule = module {
-    viewModel { MainViewModelImpl(repository = get()) }
-    viewModel { DetailedViewModelImpl(repository = get()) }
-}
-
-// endregion
-
-// region Private Functions
-
-private fun provideRetrofit(): MarvelApiService {
-    return Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(MARVEL_API_BASE_URL)
-        .client(getHttpClientInterceptor())
-        .build()
-        .create(MarvelApiService::class.java)
 }
 
 private fun getHttpClientInterceptor(): OkHttpClient {
@@ -65,5 +92,3 @@ private fun getHttpClientInterceptor(): OkHttpClient {
 
     return httpClient.addInterceptor(logging).build()
 }
-
-// endregion
