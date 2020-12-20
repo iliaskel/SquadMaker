@@ -1,4 +1,4 @@
-package com.example.squadmaker.repository
+package com.example.squadmaker.model.repository
 
 import androidx.lifecycle.LiveData
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity

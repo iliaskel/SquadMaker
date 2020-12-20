@@ -1,4 +1,4 @@
-package com.example.squadmaker.repository.mapper.entitytoentitymapper
+package com.example.squadmaker.model.repository.mapper.entitytoentitymapper
 
 interface EntityToEntityMapper<SourceEntity, DestinationEntity> {
 

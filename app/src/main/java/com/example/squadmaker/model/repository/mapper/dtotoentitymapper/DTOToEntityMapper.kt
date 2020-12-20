@@ -1,4 +1,4 @@
-package com.example.squadmaker.repository.mapper.dtotoentitymapper
+package com.example.squadmaker.model.repository.mapper.dtotoentitymapper
 
 interface DTOToEntityMapper<DTO, Entity> {
 

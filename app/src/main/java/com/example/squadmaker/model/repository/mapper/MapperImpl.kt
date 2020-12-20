@@ -1,4 +1,4 @@
-package com.example.squadmaker.repository.mapper
+package com.example.squadmaker.model.repository.mapper
 
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
@@ -6,8 +6,8 @@ import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedC
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
 import com.example.squadmaker.model.remotedatasource.retrofit.characterresponse.CharacterDTO
 import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.ComicsResponseDTO
-import com.example.squadmaker.repository.mapper.dtotoentitymapper.DTOToEntityMapper
-import com.example.squadmaker.repository.mapper.entitytoentitymapper.EntityToEntityMapper
+import com.example.squadmaker.model.repository.mapper.dtotoentitymapper.DTOToEntityMapper
+import com.example.squadmaker.model.repository.mapper.entitytoentitymapper.EntityToEntityMapper
 import javax.inject.Inject
 
 class MapperImpl

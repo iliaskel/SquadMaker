@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SquadMaker.iml" filepath="$PROJECT_DIR$/SquadMaker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SquadMaker.iml" filepath="$PROJECT_DIR$/.idea/modules/SquadMaker.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SquadMaker.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SquadMaker.app.iml" />
     </modules>
   </component>
