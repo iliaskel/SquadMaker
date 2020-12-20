@@ -17,9 +17,12 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 import java.math.BigInteger
 import java.security.MessageDigest
+import javax.inject.Inject
 import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.Response as ComicsResponse
 
-class RepositoryImpl(
+class RepositoryImpl
+@Inject
+constructor(
     squadDatabase: SquadDatabase,
     private val marvelApiService: MarvelApiService
 ) : Repository {
@@ -210,11 +213,11 @@ class RepositoryImpl(
 
     // region LiveData observing
 
-    fun getCharacters(): Flow<List<CharacterEntity>> {
+    override fun getCharacters(): Flow<List<CharacterEntity>> {
         return charactersDao.getAllCharacters()
     }
 
-    fun getSquad(): LiveData<List<SquadEntity>> {
+    override fun getSquad(): LiveData<List<SquadEntity>> {
         return squadDao.getSquad()
     }
 

@@ -1,40 +1,34 @@
 package com.example.squadmaker.view.detailedfragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.squadmaker.R
 import com.example.squadmaker.view.widgets.detailedfragment.DetailedCharacterInformationView
 import com.example.squadmaker.viewmodel.DetailedViewModelImpl
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_detailed.*
 import kotlinx.android.synthetic.main.view_detailed_character_information.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class DetailedFragment() : Fragment(),
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
+class DetailedFragment() : Fragment(R.layout.fragment_detailed),
     DetailedCharacterInformationView.CharacterViewInteraction {
 
     // region Fields
 
-    private val detailedViewModel by viewModel<DetailedViewModelImpl>()
+    private val detailedViewModel: DetailedViewModelImpl by viewModels()
 
     // endregion
 
     // region Lifecycle overrides functions
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_detailed, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

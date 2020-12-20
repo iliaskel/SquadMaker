@@ -1,16 +1,25 @@
 package com.example.squadmaker.viewmodel
 
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
-import com.example.squadmaker.repository.RepositoryImpl
+import com.example.squadmaker.repository.Repository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DetailedViewModelImpl(private val repository: RepositoryImpl) : ViewModel(),
+@ExperimentalCoroutinesApi
+class DetailedViewModelImpl
+@ViewModelInject constructor(
+    private val repository: Repository,
+    @Assisted private val savedStateHandle: SavedStateHandle
+) : ViewModel(),
     DetailedViewModel {
 
     // region Public Functions

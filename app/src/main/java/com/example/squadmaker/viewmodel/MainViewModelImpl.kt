@@ -1,21 +1,26 @@
 package com.example.squadmaker.viewmodel
 
 import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.*
 import androidx.navigation.findNavController
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
-import com.example.squadmaker.view.uimodel.UICharacter
-import com.example.squadmaker.repository.RepositoryImpl
+import com.example.squadmaker.repository.Repository
 import com.example.squadmaker.view.mainfragment.MainFragmentDirections
+import com.example.squadmaker.view.uimodel.UICharacter
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class MainViewModelImpl(private val repository: RepositoryImpl) : ViewModel(),
+@ExperimentalCoroutinesApi
+class MainViewModelImpl
+@ViewModelInject constructor(
+    private val repository: Repository,
+    @Assisted private val savedStateHandle: SavedStateHandle
+) : ViewModel(),
     MainViewModel {
 
     // region Public Functions
