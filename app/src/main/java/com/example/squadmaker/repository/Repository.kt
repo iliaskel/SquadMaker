@@ -11,11 +11,11 @@ interface Repository {
 
     suspend fun fetchAndSaveCharacters()
 
-    suspend fun fetchAndSaveDetailedCharacterById(id: Int)
+    suspend fun fetchAndSaveDetailedCharacterById(characterId: Int)
 
     suspend fun removeDetailedCharacter()
 
-    suspend fun fetchAndSaveComicsByCharacterId(id: Int)
+    suspend fun fetchAndSaveComicsByCharacterId(characterId: Int)
 
     suspend fun updateSquadEntry(isSquadMember: Boolean)
 

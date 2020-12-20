@@ -18,7 +18,7 @@ interface SquadDao {
     suspend fun insertSquadMember(squadEntity: SquadEntity)
 
     @Query("SELECT * FROM squad_table WHERE id=:id")
-    suspend fun isCharacterInSquad(id: Int): List<SquadEntity>
+    suspend fun getSquadListForCharacterId(id: Int): List<SquadEntity>
 
     @Query("DELETE  FROM squad_table WHERE id=:id")
     suspend fun deleteSquadMember(id: Int)

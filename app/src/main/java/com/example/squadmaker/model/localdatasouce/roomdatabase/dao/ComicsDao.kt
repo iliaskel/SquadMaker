@@ -10,9 +10,6 @@ interface ComicsDao {
     @Query("SELECT * FROM comics_table")
     fun getComics(): LiveData<List<ComicsEntity>>
 
-    @Query("SELECT * FROM comics_table")
-    suspend fun getComicsEntities(): List<ComicsEntity>
-
     @Transaction
     suspend fun replaceComics(comicsList: List<ComicsEntity>) {
         deleteComics()
