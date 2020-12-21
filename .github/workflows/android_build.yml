@@ -14,15 +14,11 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Access PUBLIC_API_KEY
+      - name: Access API KEYS
         env:
           PUBLIC_API_KEY: ${{ secrets.PUBLIC_API_KEY }}
-        run: echo PUBLIC_API_KEY=\"PUBLIC_API_KEY\" > ./local.properties
-
-      - name: Access PRIVATE_API_KEY
-        env:
           PRIVATE_API_KEY: ${{ secrets.PRIVATE_API_KEY }}
-        run: echo PRIVATE_API_KEY=\"PRIVATE_API_KEY\" > ./local.properties
+        run: echo PUBLIC_API_KEY="$PUBLIC_API_KEY" PRIVATE_API_KEY="$PRIVATE_API_KEY" > ./local.properties
 
       - name: Run Tests
         run: ./gradlew test
