@@ -1,4 +1,4 @@
-package com.example.squadmaker.repository
+package com.example.squadmaker.model.repository
 
 import androidx.lifecycle.LiveData
 import com.example.squadmaker.model.localdatasouce.LocalDataSource
@@ -7,7 +7,7 @@ import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEnt
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
 import com.example.squadmaker.model.remotedatasource.RemoteDataSource
-import com.example.squadmaker.repository.mapper.Mapper
+import com.example.squadmaker.model.repository.mapper.Mapper
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

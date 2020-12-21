@@ -1,9 +1,9 @@
-package com.example.squadmaker.repository.mapper.dtotoentitymapper
+package com.example.squadmaker.model.repository.mapper.dtotoentitymapper
 
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
 import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.ComicsDetailsDTO
 import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.ComicsResponseDTO
-import com.example.squadmaker.repository.utils.concat
+import com.example.squadmaker.model.repository.utils.concat
 import javax.inject.Inject
 
 class ComicsMapper

@@ -7,7 +7,7 @@ import androidx.lifecycle.*
 import androidx.navigation.findNavController
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
-import com.example.squadmaker.repository.Repository
+import com.example.squadmaker.model.repository.Repository
 import com.example.squadmaker.view.mainfragment.MainFragmentDirections
 import com.example.squadmaker.view.uimodel.UICharacter
 import kotlinx.coroutines.Dispatchers

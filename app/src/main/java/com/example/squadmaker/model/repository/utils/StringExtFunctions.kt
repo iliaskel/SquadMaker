@@ -1,4 +1,4 @@
-package com.example.squadmaker.repository.utils
+package com.example.squadmaker.model.repository.utils
 
 import android.net.Uri
 

@@ -1,4 +1,4 @@
-package com.example.squadmaker.repository.mapper
+package com.example.squadmaker.model.repository.mapper
 
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
