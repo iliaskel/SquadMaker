@@ -25,11 +25,13 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "PUBLIC_API_KEY", getPublicApiKey()
+            buildConfigField "String", "PRIVATE_API_KEY", getPrivateApiKey()
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "PUBLIC_API_KEY", getPublicApiKey()
+            buildConfigField "String", "PRIVATE_API_KEY", getPrivateApiKey()
         }
     }
     compileOptions {
@@ -117,4 +119,10 @@ String getPublicApiKey() {
     def properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
     return properties.getProperty('PUBLIC_API_KEY')
+}
+
+String getPrivateApiKey() {
+    def properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty('PRIVATE_API_KEY')
 }
