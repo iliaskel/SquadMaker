@@ -23,12 +23,13 @@ android {
         }
     }
     buildTypes {
-        applicationVariants.all { variant ->
-            variant.buildConfigField "String", "PUBLIC_API_KEY",  getPublicApiKey()
+        debug {
+            buildConfigField "String", "PUBLIC_API_KEY", getPublicApiKey()
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "PUBLIC_API_KEY", getPublicApiKey()
         }
     }
     compileOptions {
