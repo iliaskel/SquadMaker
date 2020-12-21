@@ -114,15 +114,7 @@ dependencies {
 }
 
 String getPublicApiKey() {
-    def propFile = rootProject.file("./local.properties")
     def properties = new Properties()
-    properties.load(new FileInputStream(propFile))
-    return properties['PUBLIC_API_KEY']
-}
-
-String getPrivateApiKey() {
-    def propFile = rootProject.file("./local.properties")
-    def properties = new Properties()
-    properties.load(new FileInputStream(propFile))
-    return properties['PRIVATE_API_KEY']
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty('PUBLIC_API_KEY')
 }
