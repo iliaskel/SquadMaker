@@ -11,6 +11,7 @@ import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.Com
  * An interface representing all the queries that the Application is using to interact
  * with the Marvel API.
  */
+
 interface MarvelApiService {
 
     /**

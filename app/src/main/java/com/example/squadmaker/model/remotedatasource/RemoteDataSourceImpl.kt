@@ -1,11 +1,11 @@
 package com.example.squadmaker.model.remotedatasource
 
 import android.util.Log
+import com.example.squadmaker.BuildConfig
 import com.example.squadmaker.model.remotedatasource.retrofit.api.MarvelApiService
 import com.example.squadmaker.model.remotedatasource.retrofit.characterresponse.CharacterDTO
 import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.ComicsResponseDTO
 import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.DataDTO
-import com.example.squadmaker.utils.Constants
 import retrofit2.HttpException
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -76,8 +76,8 @@ constructor(private val marvelApiService: MarvelApiService) : RemoteDataSource {
 
     private fun getMd5Input(): String {
         return (getCurrentTimestamp())
-            .plus(Constants.PRIVATE_API_KEY)
-            .plus(Constants.PUBLIC_API_KEY)
+            .plus(BuildConfig.PRIVATE_API_KEY)
+            .plus(BuildConfig.PUBLIC_API_KEY)
     }
 
     private fun getCurrentTimestamp(): String {
