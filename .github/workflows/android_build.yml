@@ -22,7 +22,7 @@ jobs:
       - name: Access PRIVATE_API_KEY
           env:
             PRIVATE_API_KEY: ${{ secrets.PRIVATE_API_KEY }}
-          run: echo PRIVATE_API_KEY=\"PPRIVATE_API_KEY\" > ./local.properties
+          run: echo PRIVATE_API_KEY=\"PRIVATE_API_KEY\" > ./local.properties
 
       - name: Run Tests
         run: ./gradlew test
