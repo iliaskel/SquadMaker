@@ -32,8 +32,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "PUBLIC_API_KEY", getPublicApiKey()
-            buildConfigField "String", "PRIVATE_API_KEY", getPrivateApiKey()
+            def public_key = getPublicApiKey()
+            def private_key = getPrivateApiKey()
+            buildConfigField "String", "PUBLIC_API_KEY", "$public_key"
+            buildConfigField "String", "PRIVATE_API_KEY", "$private_key"
         }
     }
     compileOptions {
