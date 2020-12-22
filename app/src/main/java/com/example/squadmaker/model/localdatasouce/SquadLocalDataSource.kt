@@ -1,7 +1,7 @@
 package com.example.squadmaker.model.localdatasouce
 
-import androidx.lifecycle.LiveData
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
+import kotlinx.coroutines.flow.Flow
 
 interface SquadLocalDataSource {
 
@@ -11,6 +11,6 @@ interface SquadLocalDataSource {
 
     suspend fun getSquadListForCharacterId(characterId: Int): List<SquadEntity>
 
-    fun getSquad(): LiveData<List<SquadEntity>>
+    fun getSquad(): Flow<List<SquadEntity>>
 
 }

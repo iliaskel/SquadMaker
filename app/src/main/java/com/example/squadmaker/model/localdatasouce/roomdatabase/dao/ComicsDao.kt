@@ -1,14 +1,14 @@
 package com.example.squadmaker.model.localdatasouce.roomdatabase.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ComicsDao {
 
     @Query("SELECT * FROM comics_table")
-    fun getComics(): LiveData<List<ComicsEntity>>
+    fun getComics(): Flow<List<ComicsEntity>>
 
     @Transaction
     suspend fun replaceComics(comicsList: List<ComicsEntity>) {

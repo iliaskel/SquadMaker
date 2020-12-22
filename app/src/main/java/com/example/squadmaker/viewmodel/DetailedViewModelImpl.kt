@@ -3,11 +3,14 @@ package com.example.squadmaker.viewmodel
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
+import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
 import com.example.squadmaker.model.repository.Repository
 import com.example.squadmaker.view.uimodel.UIComic
 import com.example.squadmaker.view.uimodel.UIDetailedCharacter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -48,30 +51,41 @@ class DetailedViewModelImpl
 
     override fun getDetailedCharacter(): LiveData<UIDetailedCharacter?> {
         return repository.getDetailedCharacter().map { detailedCharacterEntity ->
-            if (detailedCharacterEntity == null)
-                return@map null
-            return@map UIDetailedCharacter(
-                detailedCharacterEntity.id,
-                detailedCharacterEntity.name,
-                detailedCharacterEntity.description,
-                detailedCharacterEntity.resourceUrl,
-                detailedCharacterEntity.availableComics,
-                detailedCharacterEntity.isSquadMember
-            )
-        }
+            detailedCharacterEntity ?: return@map null
+            return@map transformToUiDetailedCharacter(detailedCharacterEntity)
+        }.asLiveData()
     }
 
     override fun getComics(): LiveData<List<UIComic>> {
         return repository.getComics().map { comicList ->
             comicList.map { comicEntity ->
-                UIComic(
-                    comicEntity.id,
-                    comicEntity.availableComics,
-                    comicEntity.resourceUri,
-                    comicEntity.name
-                )
+                transformToUIComic(comicEntity)
             }
-        }
+        }.asLiveData()
+    }
+
+    // endregion
+
+    // region Private Functions
+
+    private fun transformToUiDetailedCharacter(detailedCharacterEntity: DetailedCharacterEntity): UIDetailedCharacter {
+        return UIDetailedCharacter(
+            detailedCharacterEntity.id,
+            detailedCharacterEntity.name,
+            detailedCharacterEntity.description,
+            detailedCharacterEntity.resourceUrl,
+            detailedCharacterEntity.availableComics,
+            detailedCharacterEntity.isSquadMember
+        )
+    }
+
+    private fun transformToUIComic(comicEntity: ComicsEntity): UIComic {
+        return UIComic(
+            comicEntity.id,
+            comicEntity.availableComics,
+            comicEntity.resourceUri,
+            comicEntity.name
+        )
     }
 
     // endregion

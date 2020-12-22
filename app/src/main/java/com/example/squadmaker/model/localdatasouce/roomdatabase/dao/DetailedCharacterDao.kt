@@ -3,12 +3,13 @@ package com.example.squadmaker.model.localdatasouce.roomdatabase.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DetailedCharacterDao {
 
     @Query("SELECT * FROM detailed_character_table LIMIT 1")
-    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity?>
+    fun getDetailedCharacter(): Flow<DetailedCharacterEntity?>
 
     @Query("SELECT * FROM detailed_character_table LIMIT 1")
     suspend fun getDetailedCharacterEntity(): DetailedCharacterEntity

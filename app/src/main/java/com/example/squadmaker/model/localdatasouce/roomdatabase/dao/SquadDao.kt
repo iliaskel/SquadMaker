@@ -1,18 +1,18 @@
 package com.example.squadmaker.model.localdatasouce.roomdatabase.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
 interface SquadDao {
 
     @Query("SELECT * FROM squad_table")
-    fun getSquad(): LiveData<List<SquadEntity>>
+    fun getSquad(): Flow<List<SquadEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSquadMember(squadEntity: SquadEntity)

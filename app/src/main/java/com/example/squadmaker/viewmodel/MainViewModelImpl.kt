@@ -45,14 +45,14 @@ class MainViewModelImpl
             squadList.map { squadEntry ->
                 transformToUISquadEntry(squadEntry)
             }
-        }
+        }.asLiveData()
     }
 
     // endregion
 
     // region Private Functions
 
-    private fun transformToUICharacter(it: List<CharacterEntity>): MutableList<UICharacter> {
+    private fun transformToUICharacter(it: List<CharacterEntity>): List<UICharacter> {
         val charList = mutableListOf<UICharacter>()
         it.map { character ->
             val clickAction = getClickActionForCharacter(character.id)

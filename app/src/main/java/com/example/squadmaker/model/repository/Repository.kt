@@ -1,6 +1,5 @@
 package com.example.squadmaker.model.repository
 
-import androidx.lifecycle.LiveData
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
@@ -19,11 +18,11 @@ interface Repository {
 
     suspend fun updateSquadEntry(isSquadMember: Boolean)
 
-    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity?>
+    fun getDetailedCharacter(): Flow<DetailedCharacterEntity?>
 
-    fun getComics(): LiveData<List<ComicsEntity>>
+    fun getComics(): Flow<List<ComicsEntity>>
 
     fun getCharacters(): Flow<List<CharacterEntity>>
 
-    fun getSquad(): LiveData<List<SquadEntity>>
+    fun getSquad(): Flow<List<SquadEntity>>
 }

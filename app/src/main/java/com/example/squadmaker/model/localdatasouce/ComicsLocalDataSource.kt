@@ -2,6 +2,7 @@ package com.example.squadmaker.model.localdatasouce
 
 import androidx.lifecycle.LiveData
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
+import kotlinx.coroutines.flow.Flow
 
 interface ComicsLocalDataSource {
 
@@ -9,6 +10,6 @@ interface ComicsLocalDataSource {
 
     suspend fun deleteComics()
 
-    fun getComics(): LiveData<List<ComicsEntity>>
+    fun getComics(): Flow<List<ComicsEntity>>
 
 }
