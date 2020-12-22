@@ -7,8 +7,8 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.squadmaker.R
-import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
 import com.example.squadmaker.view.mainfragment.MySquadAdapter
+import com.example.squadmaker.view.uimodel.UISquadEntry
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import kotlinx.android.synthetic.main.view_my_squad.view.*
 
@@ -32,7 +32,7 @@ class MySquadView @JvmOverloads constructor(context: Context, attrs: AttributeSe
         this.squadInteraction = squadInteraction
     }
 
-    fun updateView(mySquadModelList: List<SquadEntity>) {
+    fun updateView(mySquadModelList: List<UISquadEntry>) {
         setTitle()
         mySquadAdapter.submitList(mySquadModelList)
     }
