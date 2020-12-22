@@ -8,7 +8,7 @@ import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedC
 interface DetailedCharacterDao {
 
     @Query("SELECT * FROM detailed_character_table LIMIT 1")
-    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity>
+    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity?>
 
     @Query("SELECT * FROM detailed_character_table LIMIT 1")
     suspend fun getDetailedCharacterEntity(): DetailedCharacterEntity

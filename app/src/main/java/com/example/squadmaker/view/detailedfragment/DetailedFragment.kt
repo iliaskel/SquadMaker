@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.example.squadmaker.R
 import com.example.squadmaker.view.widgets.detailedfragment.DetailedCharacterInformationView
 import com.example.squadmaker.viewmodel.DetailedViewModelImpl
@@ -25,7 +26,7 @@ class DetailedFragment() : Fragment(R.layout.fragment_detailed),
     // region Fields
 
     private val detailedViewModel: DetailedViewModelImpl by viewModels()
-
+    private val args: DetailedFragmentArgs by navArgs()
     // endregion
 
     // region Lifecycle overrides functions
@@ -49,10 +50,7 @@ class DetailedFragment() : Fragment(R.layout.fragment_detailed),
     // region Private Functions
 
     private fun updateDetailedCharacterInformation() {
-        val id = arguments?.let { DetailedFragmentArgs.fromBundle(it).characterId }
-        if (id != null) {
-            detailedViewModel.updateDetailedCharacter(id)
-        }
+        detailedViewModel.updateDetailedCharacter(args.characterId)
     }
 
     private fun initObservers() {
