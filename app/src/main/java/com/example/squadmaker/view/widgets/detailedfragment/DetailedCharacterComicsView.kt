@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import com.bumptech.glide.Glide
 import com.example.squadmaker.R
-import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
+import com.example.squadmaker.view.uimodel.UIComic
 import kotlinx.android.synthetic.main.view_detailed_character_comic.view.*
 
 class DetailedCharacterComicsView @JvmOverloads constructor(
@@ -22,7 +22,7 @@ class DetailedCharacterComicsView @JvmOverloads constructor(
 
     // region Public Functions
 
-    fun updateComics(comicsList: List<ComicsEntity>) {
+    fun updateComics(comicsList: List<UIComic>) {
         when {
             comicsList.isEmpty() -> {
                 setNoComicsView()
@@ -43,26 +43,26 @@ class DetailedCharacterComicsView @JvmOverloads constructor(
 
     // region Private Functions
 
-    private fun setFirstComic(comicEntry: ComicsEntity) {
+    private fun setFirstComic(comic: UIComic) {
         Glide
             .with(context)
-            .load(comicEntry.resourceUri)
+            .load(comic.resourceUri)
             .centerCrop()
             .error(R.drawable.logo)
             .into(first_comic_image)
 
-        first_comic_title.text = comicEntry.name
+        first_comic_title.text = comic.name
     }
 
-    private fun setSecondComic(comicEntry: ComicsEntity) {
+    private fun setSecondComic(comic: UIComic) {
         Glide
             .with(context)
-            .load(comicEntry.resourceUri)
+            .load(comic.resourceUri)
             .centerCrop()
             .error(R.drawable.logo)
             .into(second_comic_image)
 
-        second_comic_title.text = comicEntry.name
+        second_comic_title.text = comic.name
     }
 
     private fun setNoComicsView() {

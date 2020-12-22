@@ -19,7 +19,7 @@ interface Repository {
 
     suspend fun updateSquadEntry(isSquadMember: Boolean)
 
-    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity>
+    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity?>
 
     fun getComics(): LiveData<List<ComicsEntity>>
 

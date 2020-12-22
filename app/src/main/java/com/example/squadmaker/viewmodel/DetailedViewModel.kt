@@ -3,6 +3,8 @@ package com.example.squadmaker.viewmodel
 import androidx.lifecycle.LiveData
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
+import com.example.squadmaker.view.uimodel.UIComic
+import com.example.squadmaker.view.uimodel.UIDetailedCharacter
 
 interface DetailedViewModel {
 
@@ -32,10 +34,10 @@ interface DetailedViewModel {
     /**
      * @return LiveData with [DetailedCharacterEntity] entries stored in the database
      */
-    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity>
+    fun getDetailedCharacter(): LiveData<UIDetailedCharacter?>
 
     /**
      * @return LiveData with [ComicsEntity] entries stored in the database
      */
-    fun getComics(): LiveData<List<ComicsEntity>>
+    fun getComics(): LiveData<List<UIComic>>
 }

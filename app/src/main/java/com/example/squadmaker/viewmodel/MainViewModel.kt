@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
 import com.example.squadmaker.view.uimodel.UICharacter
+import com.example.squadmaker.view.uimodel.UISquadEntry
 
 interface MainViewModel {
 
@@ -20,5 +21,5 @@ interface MainViewModel {
     /**
      * @return [LiveData] of [SquadEntity] list
      */
-    fun getSquad(): LiveData<List<SquadEntity>>
+    fun getSquad(): LiveData<List<UISquadEntry>>
 }

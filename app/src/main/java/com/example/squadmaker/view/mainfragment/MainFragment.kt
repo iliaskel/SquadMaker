@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.squadmaker.R
-import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
-import com.example.squadmaker.view.uimodel.UICharacter
 import com.example.squadmaker.view.widgets.mainfragment.MySquadView
 import com.example.squadmaker.viewmodel.MainViewModelImpl
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,13 +46,13 @@ class MainFragment : Fragment(R.layout.fragment_main),
     private fun attachObservers() {
         mainViewModel.getCharacters()
             .observe(viewLifecycleOwner,
-                Observer<List<UICharacter>> { characterList ->
+                { characterList ->
                     main_fragment_characters_view.updateCharactersList(characterList)
                 })
 
         mainViewModel.getSquad()
             .observe(viewLifecycleOwner,
-                Observer<List<SquadEntity>> { squadList ->
+                { squadList ->
                     if (squadList.isEmpty()) {
                         main_fragment_my_squad_view.updateViewToInvisible()
                     } else {

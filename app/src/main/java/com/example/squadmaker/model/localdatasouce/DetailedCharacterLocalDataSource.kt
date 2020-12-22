@@ -11,5 +11,5 @@ interface DetailedCharacterLocalDataSource {
 
     suspend fun getDetailedCharacterEntity(): DetailedCharacterEntity
 
-    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity>
+    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity?>
 }

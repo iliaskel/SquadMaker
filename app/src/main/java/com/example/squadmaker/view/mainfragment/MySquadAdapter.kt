@@ -8,19 +8,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.squadmaker.R
-import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
+import com.example.squadmaker.view.uimodel.UISquadEntry
 import kotlinx.android.synthetic.main.list_item_squad.view.*
 
 class MySquadAdapter(private val interaction: Interaction? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SquadEntity>() {
-        override fun areItemsTheSame(oldItem: SquadEntity, newItem: SquadEntity): Boolean {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<UISquadEntry>() {
+        override fun areItemsTheSame(oldItem: UISquadEntry, newItem: UISquadEntry): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: SquadEntity, newItem: SquadEntity): Boolean {
-            return oldItem == newItem
+        override fun areContentsTheSame(oldItem: UISquadEntry, newItem: UISquadEntry): Boolean {
+            return oldItem.id == newItem.id && oldItem.thumbnailPath == newItem.thumbnailPath
         }
 
     }
@@ -49,7 +49,7 @@ class MySquadAdapter(private val interaction: Interaction? = null) :
         return differ.currentList.size
     }
 
-    fun submitList(list: List<SquadEntity>) {
+    fun submitList(list: List<UISquadEntry>) {
         differ.submitList(list)
     }
 
@@ -59,7 +59,7 @@ class MySquadAdapter(private val interaction: Interaction? = null) :
         private val interactions: Interaction?
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: SquadEntity) {
+        fun bind(item: UISquadEntry) {
             setHeroesThumbnail(item.thumbnailPath)
             setClickListeners(item.id)
         }

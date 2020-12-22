@@ -79,7 +79,7 @@ constructor(
         return localDataSource.getSquad()
     }
 
-    override fun getDetailedCharacter(): LiveData<DetailedCharacterEntity> {
+    override fun getDetailedCharacter(): LiveData<DetailedCharacterEntity?> {
         return localDataSource.getDetailedCharacter()
     }
 

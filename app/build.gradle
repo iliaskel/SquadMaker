@@ -24,14 +24,18 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "String", "PUBLIC_API_KEY", getPublicApiKey()
-            buildConfigField "String", "PRIVATE_API_KEY", getPrivateApiKey()
+            def public_key = getPublicApiKey()
+            def private_key = getPrivateApiKey()
+            buildConfigField "String", "PUBLIC_API_KEY", "\"$public_key\""
+            buildConfigField "String", "PRIVATE_API_KEY", "\"$private_key\""
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "PUBLIC_API_KEY", getPublicApiKey()
-            buildConfigField "String", "PRIVATE_API_KEY", getPrivateApiKey()
+            def public_key = getPublicApiKey()
+            def private_key = getPrivateApiKey()
+            buildConfigField "String", "PUBLIC_API_KEY", "\"$public_key\""
+            buildConfigField "String", "PRIVATE_API_KEY", "\"$private_key\""
         }
     }
     compileOptions {
@@ -117,12 +121,12 @@ dependencies {
 
 String getPublicApiKey() {
     def properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    properties.load(project.rootProject.file('./local.properties').newDataInputStream())
     return properties.getProperty('PUBLIC_API_KEY')
 }
 
 String getPrivateApiKey() {
     def properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    properties.load(project.rootProject.file('./local.properties').newDataInputStream())
     return properties.getProperty('PRIVATE_API_KEY')
 }

@@ -52,7 +52,7 @@ constructor(
         return detailedCharacterDao.getDetailedCharacterEntity()
     }
 
-    override fun getDetailedCharacter(): LiveData<DetailedCharacterEntity> {
+    override fun getDetailedCharacter(): LiveData<DetailedCharacterEntity?> {
         return detailedCharacterDao.getDetailedCharacter()
     }
 

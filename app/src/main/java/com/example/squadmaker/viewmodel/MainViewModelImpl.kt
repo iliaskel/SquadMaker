@@ -10,6 +10,7 @@ import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEnti
 import com.example.squadmaker.model.repository.Repository
 import com.example.squadmaker.view.mainfragment.MainFragmentDirections
 import com.example.squadmaker.view.uimodel.UICharacter
+import com.example.squadmaker.view.uimodel.UISquadEntry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.map
@@ -39,8 +40,12 @@ class MainViewModelImpl
         }.asLiveData()
     }
 
-    override fun getSquad(): LiveData<List<SquadEntity>> {
-        return repository.getSquad()
+    override fun getSquad(): LiveData<List<UISquadEntry>> {
+        return repository.getSquad().map { squadList ->
+            squadList.map { squadEntry ->
+                transformToUISquadEntry(squadEntry)
+            }
+        }
     }
 
     // endregion
@@ -50,11 +55,19 @@ class MainViewModelImpl
     private fun transformToUICharacter(it: List<CharacterEntity>): MutableList<UICharacter> {
         val charList = mutableListOf<UICharacter>()
         it.map { character ->
-            val clickAction = getClickActionForCharacter(character)
+            val clickAction = getClickActionForCharacter(character.id)
             val uiCharacter = getUICharacter(character, clickAction)
             charList.add(uiCharacter)
         }
         return charList
+    }
+
+    private fun transformToUISquadEntry(squadEntry: SquadEntity): UISquadEntry {
+        return UISquadEntry(
+            squadEntry.id,
+            squadEntry.thumbnailPath,
+            getClickActionForCharacter(squadEntry.id)
+        )
     }
 
     private fun getUICharacter(
@@ -69,13 +82,12 @@ class MainViewModelImpl
         )
     }
 
-    private fun getClickActionForCharacter(character: CharacterEntity): (View) -> Unit {
+    private fun getClickActionForCharacter(characterId: Int): (View) -> Unit {
         return { view: View ->
             val action =
                 MainFragmentDirections.actionMainFragmentToDetailedCharacterFragment(
-                    character.id
+                    characterId
                 )
-
             view.findNavController().navigate(action)
         }
     }

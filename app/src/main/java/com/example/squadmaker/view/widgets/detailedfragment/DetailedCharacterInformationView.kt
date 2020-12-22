@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.example.squadmaker.R
-import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
+import com.example.squadmaker.view.uimodel.UIDetailedCharacter
 import kotlinx.android.synthetic.main.fragment_detailed.view.*
 import kotlinx.android.synthetic.main.view_detailed_character_information.view.*
 
@@ -28,7 +28,7 @@ class DetailedCharacterInformationView @JvmOverloads constructor(
 
     // region Public Functions
 
-    fun updateCharacterInformation(characterInformation: DetailedCharacterEntity) {
+    fun updateCharacterInformation(characterInformation: UIDetailedCharacter) {
         setCharacterImage(characterInformation.resourceUrl)
         setCharacterName(characterInformation.name)
         setCharacterDescription(characterInformation.description)
