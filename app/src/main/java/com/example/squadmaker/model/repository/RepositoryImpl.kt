@@ -1,6 +1,5 @@
 package com.example.squadmaker.model.repository
 
-import androidx.lifecycle.LiveData
 import com.example.squadmaker.model.localdatasouce.LocalDataSource
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
@@ -75,15 +74,15 @@ constructor(
         return localDataSource.getAllCharacters()
     }
 
-    override fun getSquad(): LiveData<List<SquadEntity>> {
+    override fun getSquad(): Flow<List<SquadEntity>> {
         return localDataSource.getSquad()
     }
 
-    override fun getDetailedCharacter(): LiveData<DetailedCharacterEntity?> {
+    override fun getDetailedCharacter(): Flow<DetailedCharacterEntity?> {
         return localDataSource.getDetailedCharacter()
     }
 
-    override fun getComics(): LiveData<List<ComicsEntity>> {
+    override fun getComics(): Flow<List<ComicsEntity>> {
         return localDataSource.getComics()
     }
 

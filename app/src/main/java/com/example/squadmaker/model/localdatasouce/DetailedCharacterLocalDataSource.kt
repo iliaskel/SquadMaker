@@ -1,7 +1,7 @@
 package com.example.squadmaker.model.localdatasouce
 
-import androidx.lifecycle.LiveData
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
+import kotlinx.coroutines.flow.Flow
 
 interface DetailedCharacterLocalDataSource {
 
@@ -11,5 +11,5 @@ interface DetailedCharacterLocalDataSource {
 
     suspend fun getDetailedCharacterEntity(): DetailedCharacterEntity
 
-    fun getDetailedCharacter(): LiveData<DetailedCharacterEntity?>
+    fun getDetailedCharacter(): Flow<DetailedCharacterEntity?>
 }
