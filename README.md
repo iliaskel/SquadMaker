@@ -7,7 +7,7 @@ This App is written completely in <b>Kotlin</b>, following the <b>MVVM</b> desig
 The technologies than have been used in this App are: 
 
 <ul>
-  <li><b>Koin</b> for dependency injection</li>
+  <li><b>Hilt</b> for dependency injection</li>
   <li><b>Kotlin Coroutines</b></li>
   <li><b>Android jetpack's</b></li>
   <ul>
