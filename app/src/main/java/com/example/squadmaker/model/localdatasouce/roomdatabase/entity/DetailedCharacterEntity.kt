@@ -13,6 +13,5 @@ data class DetailedCharacterEntity(
     val name: String,
     val description: String,
     val resourceUrl: String,
-    val availableComics: Int,
     var isSquadMember: Boolean
 )

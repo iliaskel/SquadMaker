@@ -8,10 +8,8 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "comics_table")
 data class ComicsEntity(
-
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val availableComics: Int,
     val resourceUri: String,
     val name: String
 )

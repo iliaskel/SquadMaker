@@ -1,17 +1,17 @@
 package com.example.squadmaker.model.repository.mapper.dtotoentitymapper
 
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity
-import com.example.squadmaker.model.remotedatasource.retrofit.characterresponse.CharacterDTO
+import com.example.squadmaker.model.remotedatasource.responses.characters.CharacterResultsDTO
 import com.example.squadmaker.model.repository.utils.concat
 import javax.inject.Inject
 
 class CharacterMapper
 @Inject
-constructor() : DTOToEntityMapper<CharacterDTO, CharacterEntity> {
+constructor() : DTOToEntityMapper<CharacterResultsDTO, CharacterEntity> {
 
     // region Implements Mapper
 
-    override fun mapDTOToEntity(dtoObject: CharacterDTO): CharacterEntity {
+    override fun mapDTOToEntity(dtoObject: CharacterResultsDTO): CharacterEntity {
         val id = dtoObject.id.toInt()
         val name = dtoObject.name
         val thumbnailStringUri =
@@ -20,7 +20,7 @@ constructor() : DTOToEntityMapper<CharacterDTO, CharacterEntity> {
         return CharacterEntity(id, name, thumbnailStringUri)
     }
 
-    override fun mapDTOToEntityList(dtoObjectList: List<CharacterDTO>): List<CharacterEntity> {
+    override fun mapDTOToEntityList(dtoObjectList: List<CharacterResultsDTO>): List<CharacterEntity> {
         return dtoObjectList.map {
             mapDTOToEntity(it)
         }

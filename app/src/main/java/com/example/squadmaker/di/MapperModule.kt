@@ -4,8 +4,8 @@ import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.Character
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
-import com.example.squadmaker.model.remotedatasource.retrofit.characterresponse.CharacterDTO
-import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.ComicsResponseDTO
+import com.example.squadmaker.model.remotedatasource.responses.characters.CharacterResultsDTO
+import com.example.squadmaker.model.remotedatasource.responses.comics.ComicsResponseDTO
 import com.example.squadmaker.model.repository.mapper.Mapper
 import com.example.squadmaker.model.repository.mapper.MapperImpl
 import com.example.squadmaker.model.repository.mapper.dtotoentitymapper.CharacterMapper
@@ -37,7 +37,7 @@ abstract class CharacterMapperModule {
     @Binds
     abstract fun bindCharacterMapperModule(
         characterMapper: CharacterMapper
-    ): DTOToEntityMapper<CharacterDTO, CharacterEntity>
+    ): DTOToEntityMapper<CharacterResultsDTO, CharacterEntity>
 }
 
 @InstallIn(ActivityComponent::class)
@@ -47,7 +47,7 @@ abstract class DetailedCharacterMapperModule {
     @Binds
     abstract fun bindDetailedCharacterMapperModule(
         detailedCharacterMapper: DetailedCharacterMapper
-    ): DTOToEntityMapper<CharacterDTO, DetailedCharacterEntity>
+    ): DTOToEntityMapper<CharacterResultsDTO, DetailedCharacterEntity>
 }
 
 @InstallIn(ActivityComponent::class)

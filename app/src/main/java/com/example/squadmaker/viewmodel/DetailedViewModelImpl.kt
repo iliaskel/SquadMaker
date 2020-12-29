@@ -74,7 +74,6 @@ class DetailedViewModelImpl
             detailedCharacterEntity.name,
             detailedCharacterEntity.description,
             detailedCharacterEntity.resourceUrl,
-            detailedCharacterEntity.availableComics,
             detailedCharacterEntity.isSquadMember
         )
     }
@@ -82,7 +81,6 @@ class DetailedViewModelImpl
     private fun transformToUIComic(comicEntity: ComicsEntity): UIComic {
         return UIComic(
             comicEntity.id,
-            comicEntity.availableComics,
             comicEntity.resourceUri,
             comicEntity.name
         )
