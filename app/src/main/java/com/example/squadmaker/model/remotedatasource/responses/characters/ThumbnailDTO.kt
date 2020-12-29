@@ -1,4 +1,4 @@
-package com.example.squadmaker.model.remotedatasource.retrofit.characterresponse
+package com.example.squadmaker.model.remotedatasource.responses.characters
 
 import com.google.gson.annotations.SerializedName
 

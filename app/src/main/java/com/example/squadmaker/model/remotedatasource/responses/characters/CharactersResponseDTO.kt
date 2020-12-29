@@ -1,4 +1,4 @@
-package com.example.squadmaker.model.remotedatasource.retrofit.characterresponse
+package com.example.squadmaker.model.remotedatasource.responses.characters
 
 import com.google.gson.annotations.SerializedName
 
@@ -8,5 +8,5 @@ import com.google.gson.annotations.SerializedName
 data class CharactersResponseDTO(
     @SerializedName("code") val code: String,
     @SerializedName("status") val status: String,
-    @SerializedName("data") val dataDTO: DataDTO
+    @SerializedName("data") val charactersDataDTO: CharactersDataDTO
 )
