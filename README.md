@@ -2,7 +2,7 @@
 
 <h3>This is a personal application using the Marvel API to fetch Marvel Heroes and their details</h3>
 
-This App is written completely in <b>Kotlin</b>, following the <b>MVVM</b> design pattern and <b>Clean Architecture</b>
+This App is written completely in <b>Kotlin</b>, following the <b>MVVM</b> design pattern.
 
 The technologies than have been used in this App are: 
 
