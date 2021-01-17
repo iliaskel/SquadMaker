@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.squadmaker.view.mainfragment.MainFragment"
+        android:name="com.example.squadmaker.characters.fragment.CharactersFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main">
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailedCharacterFragment"
-        android:name="com.example.squadmaker.view.detailedfragment.DetailedFragment"
+        android:name="com.example.squadmaker.detailedcharacter.fragment.DetailedFragment"
         android:label="DetailedCharacterFragment"
         tools:layout="@layout/fragment_detailed">
         <argument

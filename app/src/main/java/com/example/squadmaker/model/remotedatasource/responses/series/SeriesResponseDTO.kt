@@ -3,7 +3,6 @@ package com.example.squadmaker.model.remotedatasource.responses.series
 import com.google.gson.annotations.SerializedName
 
 data class SeriesResponseDTO(
-
 	@SerializedName("code") val code: Int,
 	@SerializedName("status") val status: String,
 	@SerializedName("copyright") val copyright: String,

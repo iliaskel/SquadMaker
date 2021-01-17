@@ -2,10 +2,10 @@ package com.example.squadmaker.model.remotedatasource
 
 import android.util.Log
 import com.example.squadmaker.BuildConfig
-import com.example.squadmaker.model.remotedatasource.retrofit.api.MarvelApiService
-import com.example.squadmaker.model.remotedatasource.retrofit.characterresponse.CharacterDTO
-import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.ComicsResponseDTO
-import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.DataDTO
+import com.example.squadmaker.model.remotedatasource.apis.*
+import com.example.squadmaker.model.remotedatasource.responses.characters.CharacterResultsDTO
+import com.example.squadmaker.model.remotedatasource.responses.comics.ComicsDataDTO
+import com.example.squadmaker.model.remotedatasource.responses.comics.ComicsResponseDTO
 import retrofit2.HttpException
 import java.math.BigInteger
 import java.security.MessageDigest
@@ -13,7 +13,15 @@ import javax.inject.Inject
 
 class RemoteDataSourceImpl
 @Inject
-constructor(private val marvelApiService: MarvelApiService) : RemoteDataSource {
+constructor(
+    private val charactersApi: CharactersApi,
+    private val comicsApi: ComicsApi,
+    creatorsApi: CreatorsApi,
+    eventsApi: EventsApi,
+    seriesApi: SeriesApi,
+    storiesApi: StoriesApi
+) :
+    RemoteDataSource {
 
     // region Fields
 
@@ -23,34 +31,34 @@ constructor(private val marvelApiService: MarvelApiService) : RemoteDataSource {
 
     // region Implements RemoteDataSource
 
-    override suspend fun fetchCharacters(): List<CharacterDTO> {
+    override suspend fun fetchCharacters(): List<CharacterResultsDTO> {
         val md5 = getMd5Hash()
         val ts = getCurrentTimestamp()
 
         return try {
-            val response = marvelApiService.getCharacters(ts = ts, hash = md5)
-            response.dataDTO.results
+            val response = charactersApi.getCharacters(ts = ts, hash = md5)
+            response.charactersDataDTO.charactersResultsDTOList
         } catch (e: HttpException) {
             Log.e(TAG, e.message())
             listOf()
         }
     }
 
-    override suspend fun fetchDetailedCharacterById(characterId: Int): CharacterDTO {
+    override suspend fun fetchDetailedCharacterById(characterId: Int): CharacterResultsDTO {
         val md5 = getMd5Hash()
         val ts = getCurrentTimestamp()
 
         val response =
-            marvelApiService.getCharacterById(characterId.toString(), ts = ts, hash = md5)
-        return response.dataDTO.results[0]
+            charactersApi.getCharacterById(characterId.toString(), ts = ts, hash = md5)
+        return response.charactersDataDTO.charactersResultsDTOList[0]
     }
 
-    override suspend fun getComicsForCharacterId(characterId: Int): ComicsResponseDTO {
+    override suspend fun fetchComicsForCharacterId(characterId: Int): ComicsResponseDTO {
         val md5 = getMd5Hash()
         val ts = getCurrentTimestamp()
 
         return try {
-            marvelApiService.getComicsByCharacterId(
+            charactersApi.getComicsForCharacterId(
                 characterId = characterId.toString(),
                 ts = ts,
                 hash = md5
@@ -58,9 +66,9 @@ constructor(private val marvelApiService: MarvelApiService) : RemoteDataSource {
         } catch (e: HttpException) {
             Log.e(TAG, e.message())
             ComicsResponseDTO(
-                code = "",
+                code = 0,
                 status = "",
-                dataDTO = DataDTO(limit = "", total = "", results = listOf())
+                comicsDataDTO = ComicsDataDTO(limit = 0, total = 0, comicsResultsDTOList = listOf())
             )
         }
     }

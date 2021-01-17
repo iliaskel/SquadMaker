@@ -10,6 +10,14 @@ import androidx.room.PrimaryKey
 data class ComicsEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val resourceUri: String,
-    val name: String
+    val digitalId: Int,
+    val title: String,
+    val issueNumber: Int,
+    val description: String,
+    val modified: String,
+    val format: String,
+    val pageCount: Int,
+    val resourceURI: String,
+    val pricesList: Map<String, Float>,
+    val thumbnailPath: String
 )
