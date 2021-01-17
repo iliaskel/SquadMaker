@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.example.squadmaker.view.widgets.detailedfragment.DetailedCharacterInformationView
+        <com.example.squadmaker.detailedcharacter.widgets.DetailedCharacterInformationView
             android:id="@+id/detailed_character_information_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.example.squadmaker.view.widgets.detailedfragment.DetailedCharacterComicsView
+        <com.example.squadmaker.detailedcharacter.widgets.DetailedCharacterComicsView
             android:id="@+id/detailed_character_comic_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

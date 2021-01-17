@@ -8,7 +8,7 @@
     android:background="@color/color_second_layer"
     android:orientation="vertical">
 
-    <com.example.squadmaker.view.widgets.mainfragment.AppTitleView
+    <com.example.squadmaker.characters.widgets.AppTitleView
         android:id="@+id/main_fragment_app_title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -23,12 +23,12 @@
             android:background="@color/color_second_layer"
             android:orientation="vertical">
 
-            <com.example.squadmaker.view.widgets.mainfragment.MySquadView
+            <com.example.squadmaker.characters.widgets.MySquadView
                 android:id="@+id/main_fragment_my_squad_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.example.squadmaker.view.widgets.mainfragment.CharactersView
+            <com.example.squadmaker.characters.widgets.charactersadapter.CharactersView
                 android:id="@+id/main_fragment_characters_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

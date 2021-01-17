@@ -2,68 +2,57 @@ package com.example.squadmaker.di
 
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.CharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.ComicsEntity
-import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.DetailedCharacterEntity
 import com.example.squadmaker.model.localdatasouce.roomdatabase.entity.SquadEntity
-import com.example.squadmaker.model.remotedatasource.retrofit.characterresponse.CharacterDTO
-import com.example.squadmaker.model.remotedatasource.retrofit.comicsresponse.ComicsResponseDTO
+import com.example.squadmaker.model.remotedatasource.responses.characters.CharacterResultsDTO
+import com.example.squadmaker.model.remotedatasource.responses.comics.ComicsResponseDTO
 import com.example.squadmaker.model.repository.mapper.Mapper
 import com.example.squadmaker.model.repository.mapper.MapperImpl
-import com.example.squadmaker.model.repository.mapper.dtotoentitymapper.CharacterMapper
-import com.example.squadmaker.model.repository.mapper.dtotoentitymapper.ComicsMapper
 import com.example.squadmaker.model.repository.mapper.dtotoentitymapper.DTOToEntityMapper
-import com.example.squadmaker.model.repository.mapper.dtotoentitymapper.DetailedCharacterMapper
-import com.example.squadmaker.model.repository.mapper.entitytoentitymapper.DetailedCharacterEntityToSquadEntityMapper
+import com.example.squadmaker.model.repository.mapper.dtotoentitymapper.character.CharacterMapper
+import com.example.squadmaker.model.repository.mapper.dtotoentitymapper.comics.ComicsMapper
+import com.example.squadmaker.model.repository.mapper.entitytoentitymapper.CharacterEntityToSquadEntityMapper
 import com.example.squadmaker.model.repository.mapper.entitytoentitymapper.EntityToEntityMapper
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.components.ApplicationComponent
+import javax.inject.Singleton
 
-@InstallIn(ActivityComponent::class)
+@InstallIn(ApplicationComponent::class)
 @Module
 abstract class MapperModule {
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindMapperModule(
         mapperImpl: MapperImpl
     ): Mapper
 }
 
-@InstallIn(ActivityComponent::class)
+@InstallIn(ApplicationComponent::class)
 @Module
 abstract class CharacterMapperModule {
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindCharacterMapperModule(
         characterMapper: CharacterMapper
-    ): DTOToEntityMapper<CharacterDTO, CharacterEntity>
+    ): DTOToEntityMapper<CharacterResultsDTO, CharacterEntity>
 }
 
-@InstallIn(ActivityComponent::class)
+@InstallIn(ApplicationComponent::class)
 @Module
-abstract class DetailedCharacterMapperModule {
-    @ActivityScoped
+abstract class SquadMapper {
+    @Singleton
     @Binds
-    abstract fun bindDetailedCharacterMapperModule(
-        detailedCharacterMapper: DetailedCharacterMapper
-    ): DTOToEntityMapper<CharacterDTO, DetailedCharacterEntity>
+    abstract fun bindCharacterToSquadMapperModule(
+        characterEntityToSquadEntityMapper: CharacterEntityToSquadEntityMapper
+    ): EntityToEntityMapper<CharacterEntity, SquadEntity>
 }
 
-@InstallIn(ActivityComponent::class)
-@Module
-abstract class DetailedCharacterToSquadMapperModule {
-    @ActivityScoped
-    @Binds
-    abstract fun bindDetailedCharacterToSquadMapperModule(
-        detailedCharacterEntityToSquadEntityMapper: DetailedCharacterEntityToSquadEntityMapper
-    ): EntityToEntityMapper<DetailedCharacterEntity, SquadEntity>
-}
-
-@InstallIn(ActivityComponent::class)
+@InstallIn(ApplicationComponent::class)
 @Module
 abstract class ComicsMapperModule {
-    @ActivityScoped
+    @Singleton
     @Binds
     abstract fun bindComicsMapperModule(
         comicsMapper: ComicsMapper
